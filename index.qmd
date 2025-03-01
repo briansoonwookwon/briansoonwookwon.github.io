@@ -1,0 +1,102 @@
+---
+title: 🍽️ Korean Food Night 🇰🇷
+author: "Brian"
+date: 2025-03-08
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-location: right
+    page-layout: full
+---
+
+Hello! Are you a hungry soul searching for delicious food? Then you've come to the right place! 😋
+
+### 🎉 Special Thanks
+🙏 Shout out to my mom, the best cook I know! Without her, I wouldn't be able to make any of these dishes! Also, a huge thank you to:\
+- **Tiana & Liz** for hosting the event 🏡\
+- **Jorge** for being the amazing sous-chef 👨‍🍳\
+- **Ishaan** for bringing extra food 🍱 \
+- **ChatGPT** for making this file "pretty"
+
+💰 *There will be a small charge for groceries (around **$10-15 per person**, depending on attendance).* 
+
+📅 **Looking forward to seeing you all on Saturday!** 🍻
+
+---
+
+## 🍛 Main Dishes
+
+### 1️⃣ Bossam / Suyuk (보쌈 / 수육) - **GF**
+![Bossam](bossam.webp)
+
+- **Ingredients:** Pork belly, Onion, Doenjang, Green Onion, Garlic, (Beer/Soju, Coffee)\
+- **Description:** Tender, slow-boiled pork belly served with flavorful dipping sauces and fresh vegetables.
+
+### 2️⃣ Kimchi-jjim (김치찜) - **GF**
+![Kimchi-jjim](kimchijjim.jpg)
+
+- **Ingredients:** Kimchi, Pork Ribs, Onion\
+- **Description:** Spicy, slow-braised kimchi and pork ribs—perfect comfort food!
+
+---
+
+## 🥢 Side Dishes
+
+### 1️⃣ Gyeran-jjim (계란찜) - **GF**
+![Gyeran-jjim](gyeranjjim.webp)
+
+- **Ingredients:** Egg, Green Onions\
+- **Description:** Fluffy, savory steamed egg custard.
+
+### 2️⃣ Hobakjeon (호박전) - **GF**
+![Hobakjeon](hobakjeon.jpg)
+
+- **Ingredients:** Zucchini, Egg, Corn starch\
+- **Description:** Lightly pan-fried zucchini slices in a crispy egg batter.
+
+### 3️⃣ Doenjang-jjigae (된장찌개)
+![Doenjang-jjigae](deonjang.jpg)
+
+- **Ingredients:** Doenjang, Tofu, Zucchini, Onion\
+- **Description:** Classic Korean soybean paste stew with tofu and vegetables.
+
+### 4️⃣ Kimchi - **GF**
+
+- **Ingredients:** Napa Cabbage, Various Korean seasonings\
+- **Description:** The beloved Korean fermented cabbage dish!
+
+---
+
+## 🍰 Dessert 🍧
+*To be determined based on grocery availability!*
+Possible options:\
+- **Hotteok (호떡)** – Sweet Korean pancakes with brown sugar filling\
+- **Bingsu (빙수)** – Shaved ice dessert with toppings\
+- **Bungeo-ppang (붕어빵)** – Fish-shaped pastry with sweet filling
+
+---
+
+## 🔥 Potential Additional Dishes
+
+### 1️⃣ Jeyuk Bokkeum (제육볶음)
+![Jeyuk Bokkeum](jeyukbokkeom.jpg)
+
+- **Ingredients:** Beef/Pork, Gochujang, Onion\
+- **Description:** Spicy stir-fried pork with a rich gochujang-based sauce.
+
+### 2️⃣ Dubu Jorim (두부조림) - **GF**
+![Dubu Jorim](dubujorim.jpg)
+
+- **Ingredients:** Tofu, Soy Sauce, Garlic, Sesame Oil\
+- **Description:** Braised tofu in a savory soy-garlic sauce.
+
+### 3️⃣ Namul (나물) - **GF**
+![Namul](namul.jpg)
+
+- **Ingredients:** Spinach, Bean sprouts, or other greens\
+- **Description:** Lightly seasoned and sautéed Korean vegetable sides.
+
+---
+
+💬 **Questions or special requests? Let me know!** Can't wait to feast with you all! 🍶🥂
