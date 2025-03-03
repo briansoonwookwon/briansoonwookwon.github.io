@@ -25,7 +25,7 @@ Hello! Are you a hungry soul searching for delicious food? Then you've come to t
 
 🍚 *There will also be rice provided to complement the dishes!* 🍚
 
-📅 **Looking forward to seeing you all on Saturday!** 🍻
+📅 **Looking forward to seeing you all on Saturday at 6pm!** 🍻
 
 #### ⚠️ Disclaimer
 - The menu items are subject to availability and may change.
@@ -39,15 +39,15 @@ Hello! Are you a hungry soul searching for delicious food? Then you've come to t
 ### 1️⃣ Bossam / Suyuk (보쌈 / 수육) 
 ![Bossam](bossam.webp)
 
-- **Ingredients:** Pork belly, Onion, Doenjang, Green Onion, Garlic, (Beer/Soju, Coffee)\
-- **Description:** Tender, slow-boiled pork belly served with flavorful dipping sauces and fresh vegetables.
+- **Ingredients:** Pork belly, Onion, Doenjang, Garlic, (Beer/Soju, Coffee, Green Onion)\
+- **Description:** Tender, slow-boiled pork served with Ssamjang and fresh vegetables (lettuce or ssam mu).
 - There will be GF version for Liz.
 
 ### 2️⃣ Kimchi-jjim (김치찜) - **GF**
 ![Kimchi-jjim](kimchijjim.jpg)
 
 - **Ingredients:** Kimchi, Pork Ribs, Onion\
-- **Description:** Spicy, slow-braised kimchi and pork ribs—perfect comfort food!
+- **Description:** Slow-braised kimchi and pork ribs
 
 ---
 
@@ -56,7 +56,7 @@ Hello! Are you a hungry soul searching for delicious food? Then you've come to t
 ### 1️⃣ Gyeran-jjim (계란찜) - **GF**
 ![Gyeran-jjim](gyeranjjim.webp)
 
-- **Ingredients:** Egg, Green Onions\
+- **Ingredients:** Egg, Green Onions, Carrots\
 - **Description:** Fluffy, savory steamed egg custard.
 
 ### 2️⃣ Hobakjeon (호박전) - **GF**
@@ -68,13 +68,13 @@ Hello! Are you a hungry soul searching for delicious food? Then you've come to t
 ### 3️⃣ Doenjang-jjigae (된장찌개)
 ![Doenjang-jjigae](deonjang.jpg)
 
-- **Ingredients:** Doenjang, Tofu, Zucchini, Onion\
-- **Description:** Classic Korean soybean paste stew with tofu and vegetables.
+- **Ingredients:** Doenjang, Tofu, Zucchini, Onion, Potato, Garlic\
+- **Description:** Korean soybean paste stew with tofu and vegetables.
 
 ### 4️⃣ Kimchi - **GF**
 
 - **Ingredients:** Napa Cabbage, Various Korean seasonings\
-- **Description:** The beloved Korean fermented cabbage dish!
+- **Description:** The beloved Korean fermented cabbage dish.
 
 ---
 
@@ -93,14 +93,15 @@ Possible options:\
 ### 1️⃣ Jeyuk Bokkeum (제육볶음)
 ![Jeyuk Bokkeum](jeyukbokkeom.jpg)
 
-- **Ingredients:** Beef/Pork, Gochujang, Onion\
-- **Description:** Spicy stir-fried pork with a rich gochujang-based sauce.
+- **Ingredients:** Beef/Pork, Gochujang, Onion, Zucchini, Green Onion, Garlic, Soy Sauce\
+- **Description:** Spicy stir-fried beef/pork with a gochujang-based sauce.
 
 ### 2️⃣ Dubu Jorim (두부조림)
 ![Dubu Jorim](dubujorim.jpg)
 
-- **Ingredients:** Tofu, Soy Sauce, Garlic, Sesame Oil\
+- **Ingredients:** Tofu, Soy Sauce, Garlic, Sesame Oil, (Green Onion, Onion, Oyster Sauce, Cabbage) \
 - **Description:** Braised tofu in a savory soy-garlic sauce.
+- Can be made GF
 
 ### 3️⃣ Namul (나물) - **GF**
 ![Namul](namul.jpg)
