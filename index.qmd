@@ -95,7 +95,7 @@ Tools Available:
 - Tavily Web Search and the Wikipedia loader package were used to bring in realtime information from the web.
 - The FAISS database of Chess.com educational articles spanned six curated categories (For Beginners, Strategy, Tactics, Opening Theory, Middlegame, Endgames)
 
-These tools are queried depending on the nature of the user's question. For example, a strategy question might trigger retrieval from the FAISS vector store. While a news quetion, (e.g., "Who won the 2024 Candidates Tournament?") triggers a Tavily search. In practice, the model could describe Chess tournaments which happened within a week before the date of testing or less, suggesting it incorporated the information it learned from these tools. 
+These tools are queried depending on the nature of the user's question. For example, a strategy question might trigger retrieval from the FAISS vector store. While a news question, (e.g., "Who won the 2024 Candidates Tournament?") triggers a Tavily search. In practice, the model could describe Chess tournaments which happened within a week before the date of testing or less, suggesting it incorporated the information it learned from these tools. This could allow for directing new chess users to helpful websites and resources that would facilitate their growth in the game, as seen in the example below:
 
 ![Search example](./imgs/search.png)
 
