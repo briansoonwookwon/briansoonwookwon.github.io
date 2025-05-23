@@ -5,15 +5,6 @@ format:
     embed-resources: true
 ---
 
-<div class="project-card">
-  <img src="https://about.fb.com/wp-content/uploads/2018/12/FactCheckers_Thumbnail_Final.jpg" alt="Project Image">
-  <div class="overlay">
-    Impact of Macroeconomic Variables on BRICS
-    <p style="color: white;">Quarto, Predictive Analytics, Feature Engineering, Website Development, CSS/HTML</p>
-  </div>
-</div>
-
-
 <!-- 6700 Project-->
 
 ::::{.columns}
