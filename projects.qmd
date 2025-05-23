@@ -1,0 +1,127 @@
+---
+title: Projects
+format: 
+  html: 
+    embed-resources: true
+---
+
+<div class="project-card">
+  <img src="https://about.fb.com/wp-content/uploads/2018/12/FactCheckers_Thumbnail_Final.jpg" alt="Project Image">
+  <div class="overlay">
+    Impact of Macroeconomic Variables on BRICS
+    <p style="color: white;">Quarto, Predictive Analytics, Feature Engineering, Website Development, CSS/HTML</p>
+  </div>
+</div>
+
+
+<!-- 6700 Project-->
+
+::::{.columns}
+:::{.column width="49%"}
+[<img src="https://about.fb.com/wp-content/uploads/2018/12/FactCheckers_Thumbnail_Final.jpg" width="500" height="300" />](https://github.com/briansoonwookwon/DSAN_6700)
+:::
+
+:::{.column width="1%"}
+:::
+
+:::{.column width="50%"}
+### [Information Retrieval: CrisisFACTS](https://github.com/briansoonwookwon/DSAN_6700)
+A Python package on Information Retrieval : CrisisFACTS
+:::
+::::
+
+<!-- 6000 Project-->
+
+::::{.columns}
+:::{.column width="49%"}
+[<img src="https://www.edigitalagency.com.au/wp-content/uploads/new-reddit-logo-wordmark-with-snoo-head-on-a-red-background.png" width="500" height="300" />](http://bsk.georgetown.domains/6000-website/docs/)
+:::
+
+:::{.column width="1%"}
+:::
+
+:::{.column width="50%"}
+### [Patterns in U.S. Political Discussions](http://bsk.georgetown.domains/6000-website/docs/)
+Big Data Analysis Project on Reddit understanding trends and changes of U.S. political discussions in subreddits.
+:::
+::::
+
+<!-- 6700 LSH -->
+
+::::{.columns}
+:::{.column width="49%"}
+[<img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*P8n3aIyqPKWzxeGMAenEag.png" width="500" height="300" />](https://github.com/briansoonwookwon/LSH)
+:::
+
+:::{.column width="1%"}
+:::
+
+:::{.column width="50%"}
+### [LSH with improvements from scratch for Similarity Search](https://github.com/briansoonwookwon/LSH)
+A Python package of LSH with two additional improvements to identify near duplicate files.
+:::
+::::
+
+<!-- 5300 -->
+
+::::{.columns}
+:::{.column width="49%"}
+[<img src="https://news.airbnb.com/wp-content/uploads/sites/4/2020/04/Airbnb_Lockup_Over_Gradient.png" width="500" height="300" />](http://bsk.georgetown.domains/5300-website/_site/)
+:::
+
+:::{.column width="1%"}
+:::
+
+:::{.column width="50%"}
+### [Feature Engineered Regression Analysis on Airbnb Short Term Rental Market](http://bsk.georgetown.domains/5300-website/_site/)
+Data Analysis on Airbnb data predicting the rental price and finding important features.
+:::
+::::
+
+<!-- 5000 -->
+
+::::{.columns}
+:::{.column width="49%"}
+[<img src="https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_25/2905386/190621-immigrant-hat-graduation-ew-1010a.jpg" width="500" height="300" />](http://bsk.georgetown.domains/5000-website/_site/)
+:::
+
+:::{.column width="1%"}
+:::
+
+:::{.column width="50%"}
+### [Why immigrants are successful?](http://bsk.georgetown.domains/5000-website/_site/)
+Comparison on the success between immigrants and native-borns in the U.S. using various machine learning methods. 
+:::
+::::
+
+<!-- 5200 -->
+
+::::{.columns}
+:::{.column width="49%"}
+[<img src="https://d2eehagpk5cl65.cloudfront.net/img/wp-content/uploads/2024/05/DC.jpg" width="500" height="300" />](http://bsk.georgetown.domains/5200-website/_site/)
+:::
+
+:::{.column width="1%"}
+:::
+
+:::{.column width="50%"}
+### [DC Crime Trend Analysis from 2018 - 2022](http://bsk.georgetown.domains/5200-website/_site/)
+Data Visualization report on Washington D.C. Crime Date from 2018-2022.
+:::
+::::
+
+<!-- 5100 -->
+
+::::{.columns}
+:::{.column width="49%"}
+[<img src="https://www.scdn.co/i/_global/open-graph-default.png" width="500" height="300" />](http://bsk.georgetown.domains/5100-website/_site/)
+:::
+
+:::{.column width="1%"}
+:::
+
+:::{.column width="50%"}
+### [Behind the Beats: A Feature Analysis of Songs by Spotify’s Fab Five](http://bsk.georgetown.domains/5100-website/_site/)
+Statistical analysis on seven audio features of songs from five most streamed artists of 2022 in spotify.
+:::
+::::
