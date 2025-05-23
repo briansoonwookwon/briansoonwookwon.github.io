@@ -25,7 +25,7 @@ A Python package on Information Retrieval : CrisisFACTS
 
 ::::{.columns}
 :::{.column width="49%"}
-[<img src="https://www.edigitalagency.com.au/wp-content/uploads/new-reddit-logo-wordmark-with-snoo-head-on-a-red-background.png" width="500" height="300" />](https://briansoonwookwon.github.io/dsan_6000/)
+[<img src="https://www.edigitalagency.com.au/wp-content/uploads/new-reddit-logo-wordmark-with-snoo-head-on-a-red-background.png" width="500" height="300" />](https://briansoonwookwon.github.io/docs/dsan_6000/)
 :::
 
 :::{.column width="1%"}
