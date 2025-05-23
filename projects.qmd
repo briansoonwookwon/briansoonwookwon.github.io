@@ -32,7 +32,7 @@ A Python package on Information Retrieval : CrisisFACTS
 :::
 
 :::{.column width="50%"}
-### [Patterns in U.S. Political Discussions](https://briansoonwookwon.github.io/dsan_6000/)
+### [Patterns in U.S. Political Discussions](https://briansoonwookwon.github.io/docs/dsan_6000/)
 Big Data Analysis Project on Reddit understanding trends and changes of U.S. political discussions in subreddits.
 :::
 ::::
