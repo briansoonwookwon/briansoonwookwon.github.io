@@ -9,14 +9,14 @@ format:
 
 ::::{.columns}
 :::{.column width="49%"}
-[<img src="https://www.edigitalagency.com.au/wp-content/uploads/new-reddit-logo-wordmark-with-snoo-head-on-a-red-background.png" width="500" height="300" />](DSAN_6000/website-source/index.html)
+[<img src="https://www.edigitalagency.com.au/wp-content/uploads/new-reddit-logo-wordmark-with-snoo-head-on-a-red-background.png" width="500" height="300" />](https://briansoonwookwon.github.io/dsan_6000/)
 :::
 
 :::{.column width="1%"}
 :::
 
 :::{.column width="50%"}
-### [Patterns in U.S. Political Discussions](DSAN_6000/website-source/index.html)
+### [Patterns in U.S. Political Discussions](https://briansoonwookwon.github.io/dsan_6000/)
 Big Data Analysis Project on Reddit understanding trends and changes of U.S. political discussions in subreddits.
 :::
 ::::
