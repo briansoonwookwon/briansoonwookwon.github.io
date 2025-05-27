@@ -9,14 +9,14 @@ format:
 
 ::::{.columns}
 :::{.column width="49%"}
-[<img src="https://mychessets.com/cdn/shop/articles/text-to-image_4eb264d3-9037-4ffc-a7aa-7582cd4f40d3.png?v=1714752472" width="500" height="300" />](https://briansoonwookwon.github.io/docs/dsan_6725/)
+[<img src="https://mychessets.com/cdn/shop/articles/text-to-image_4eb264d3-9037-4ffc-a7aa-7582cd4f40d3.png?v=1714752472" width="500" height="300" />](https://briansoonwookwon.github.io/docs/dsan_6725/report.html)
 :::
 
 :::{.column width="1%"}
 :::
 
 :::{.column width="50%"}
-### [ChessMate: A LLM based Chatbot for Chess](https://briansoonwookwon.github.io/docs/dsan_6725/)
+### [ChessMate: A LLM based Chatbot for Chess](https://briansoonwookwon.github.io/docs/dsan_6725/report.html)
 ChessMate is a Streamlit web app that lets users play chess against an LLM and Stockfish, while offering a text interface for move suggestions via RAG over grandmaster games, a fine-tuned model, chess.com articles, and live web search.
 :::
 ::::
@@ -25,14 +25,14 @@ ChessMate is a Streamlit web app that lets users play chess against an LLM and S
 
 ::::{.columns}
 :::{.column width="50%"}
-[<img src="docs/dsan_6500/WatchDog_AI.png" height="300" />](https://briansoonwookwon.github.io/docs/dsan_6500/)
+[<img src="docs/dsan_6500/WatchDog_AI.png" height="300" />](https://briansoonwookwon.github.io/docs/dsan_6500/report.html)
 :::
 
 :::{.column width="1%"}
 :::
 
 :::{.column width="49%"}
-### [WatchDogAI](https://briansoonwookwon.github.io/docs/dsan_6500/)
+### [WatchDogAI](https://briansoonwookwon.github.io/docs/dsan_6500/report.html)
 This project aims to detect AI-generated images in election officials’ social media posts about voter information as a first step toward studying potential mistrust in the voter information space.
 :::
 ::::
