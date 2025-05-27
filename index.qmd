@@ -15,14 +15,14 @@ format:
 ---
 
 # About Me
-Brian Kwon, as an aspiring Data Scientist, is currently pursuing a graduate degree in Data Science and Analytics at Georgetown University. His career journey began with a passion for understanding the impact of policies, which led him to discover the power of statistics and data science in shaping meaningful outcomes. His current interests include machine learning, deep learning, MLOps, and computer vision. Outside of academics, He enjoys playing guitar, listening to lots of music, cooking foods, solving Rubik’s cubes, and reading books.
+Brian Kwon is a Data Scientist and AI Engineer. His career journey began with a passion for understanding the impact of policies, which led him to discover the power of statistics and data science in shaping meaningful outcomes. His current interests include machine learning, deep learning, MLOps, and computer vision. Outside of academics, He enjoys playing guitar, listening to lots of music, cooking foods, solving Rubik’s cubes, and reading books.
 
 # Education
 **MS in Data Science and Analytics**\
 *Georgetown University* | Washington, DC | May 2025
 
 - Relevant courses:\
-Big Data and Cloud Computing | ML App Deployment | Computer Vision | Neural Nets and Deep Learning | Data Visualization
+Big Data and Cloud Computing | ML App Deployment | Computer Vision | Applied Gen AI for developers | Neural Nets and Deep Learning | Data Visualization
 
 **B.A in Social Relations and Policy**\
 Statistics Double Major, Data Science Minor\
@@ -30,9 +30,8 @@ Statistics Double Major, Data Science Minor\
 
 # Skills
 
-- **Computer**: Python, R, SQL, Git, Terminal, AWS, Azure, Docker, MLFlow, Qualtrics, Quarto, HTML
+- **Computer**: Python, R, SQL, Git, Bash, AWS, Azure, Docker, Qualtrics, Quarto, HTML
 
-- **Packages**: PyTorch, PySpark, Keras, Scikit-Learn, Pandas, BeautifulSoup, NetworkX, SciPy, Geopandas, Tidyverse
+- **Packages**: LangChain, PyTorch, Tensorflow, Keras, PySpark, HuggingFace, BeautifulSoup, PyTest, MLFlow, Pydantic, RAGAS, Pinecone, FAISS, Pandas, Scikit-Learn, SciPy, NetworkX,NLTK, Tidyverse
 
-- **Visualization**: Tableau, Plotly, ggplot, Matplotlib, Seaborn, Leaflet, Folium, Observable, D3js, Vega-Altair
-
+- **Visualization**: Streamlit, Plotly, ggplot, Matplotlib, Seaborn, Leaflet, Folium, Tableau, Chainlit
