@@ -5,6 +5,10 @@ format:
     embed-resources: true
 ---
 
+<!-- 6725 Project-->
+
+<!-- 6500 Project-->
+
 <!-- 6700 Project-->
 
 ::::{.columns}
@@ -57,14 +61,14 @@ A Python package of LSH with two additional improvements to identify near duplic
 
 ::::{.columns}
 :::{.column width="49%"}
-[<img src="https://news.airbnb.com/wp-content/uploads/sites/4/2020/04/Airbnb_Lockup_Over_Gradient.png" width="500" height="300" />](http://bsk.georgetown.domains/5300-website/_site/)
+[<img src="https://news.airbnb.com/wp-content/uploads/sites/4/2020/04/Airbnb_Lockup_Over_Gradient.png" width="500" height="300" />](https://briansoonwookwon.github.io/docs/dsan_5300/)
 :::
 
 :::{.column width="1%"}
 :::
 
 :::{.column width="50%"}
-### [Feature Engineered Regression Analysis on Airbnb Short Term Rental Market](http://bsk.georgetown.domains/5300-website/_site/)
+### [Feature Engineered Regression Analysis on Airbnb Short Term Rental Market](https://briansoonwookwon.github.io/docs/dsan_5300/)
 Data Analysis on Airbnb data predicting the rental price and finding important features.
 :::
 ::::
@@ -73,14 +77,14 @@ Data Analysis on Airbnb data predicting the rental price and finding important f
 
 ::::{.columns}
 :::{.column width="49%"}
-[<img src="https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_25/2905386/190621-immigrant-hat-graduation-ew-1010a.jpg" width="500" height="300" />](http://bsk.georgetown.domains/5000-website/_site/)
+[<img src="https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_25/2905386/190621-immigrant-hat-graduation-ew-1010a.jpg" width="500" height="300" />](https://briansoonwookwon.github.io/docs/dsan_5000/)
 :::
 
 :::{.column width="1%"}
 :::
 
 :::{.column width="50%"}
-### [Why immigrants are successful?](http://bsk.georgetown.domains/5000-website/_site/)
+### [Why immigrants are successful?](https://briansoonwookwon.github.io/docs/dsan_5000/)
 Comparison on the success between immigrants and native-borns in the U.S. using various machine learning methods. 
 :::
 ::::
@@ -89,14 +93,14 @@ Comparison on the success between immigrants and native-borns in the U.S. using 
 
 ::::{.columns}
 :::{.column width="49%"}
-[<img src="https://d2eehagpk5cl65.cloudfront.net/img/wp-content/uploads/2024/05/DC.jpg" width="500" height="300" />](http://bsk.georgetown.domains/5200-website/_site/)
+[<img src="https://d2eehagpk5cl65.cloudfront.net/img/wp-content/uploads/2024/05/DC.jpg" width="500" height="300" />](https://briansoonwookwon.github.io/docs/dsan_5200/)
 :::
 
 :::{.column width="1%"}
 :::
 
 :::{.column width="50%"}
-### [DC Crime Trend Analysis from 2018 - 2022](http://bsk.georgetown.domains/5200-website/_site/)
+### [DC Crime Trend Analysis from 2018 - 2022](https://briansoonwookwon.github.io/docs/dsan_5200/)
 Data Visualization report on Washington D.C. Crime Date from 2018-2022.
 :::
 ::::
@@ -105,14 +109,14 @@ Data Visualization report on Washington D.C. Crime Date from 2018-2022.
 
 ::::{.columns}
 :::{.column width="49%"}
-[<img src="https://www.scdn.co/i/_global/open-graph-default.png" width="500" height="300" />](http://bsk.georgetown.domains/5100-website/_site/)
+[<img src="https://www.scdn.co/i/_global/open-graph-default.png" width="500" height="300" />](https://briansoonwookwon.github.io/docs/dsan_5100/)
 :::
 
 :::{.column width="1%"}
 :::
 
 :::{.column width="50%"}
-### [Behind the Beats: A Feature Analysis of Songs by Spotify’s Fab Five](http://bsk.georgetown.domains/5100-website/_site/)
+### [Behind the Beats: A Feature Analysis of Songs by Spotify’s Fab Five](https://briansoonwookwon.github.io/docs/dsan_5100/)
 Statistical analysis on seven audio features of songs from five most streamed artists of 2022 in spotify.
 :::
 ::::

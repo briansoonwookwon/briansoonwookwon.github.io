@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Success of Immigrants - Data Exploration</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./naive_bayes.html" rel="next">
+<link href="./data_cleaning.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_gathering.html">Preparation</a></li><li class="breadcrumb-item"><a href="./eda.html">Data Exploration</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Success of Immigrants</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/anly501/dsan-5000-project-briansoonwookwon.git" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Preparation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_gathering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Gathering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_cleaning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Cleaning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./eda.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Data Exploration</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./naive_bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Naive Bayes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Decision Trees</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./decision_trees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classification Trees</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression_tree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regression Trees</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clustering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dimentionality_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dimensionality Reduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Association Rule Mining</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conclusions</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#general-trends" id="toc-general-trends" class="nav-link active" data-scroll-target="#general-trends">General Trends</a>
+  <ul class="collapse">
+  <li><a href="#wage" id="toc-wage" class="nav-link" data-scroll-target="#wage">Wage</a></li>
+  <li><a href="#wage-vs-other-indicators" id="toc-wage-vs-other-indicators" class="nav-link" data-scroll-target="#wage-vs-other-indicators">Wage vs Other indicators</a></li>
+  </ul></li>
+  <li><a href="#country-comparison" id="toc-country-comparison" class="nav-link" data-scroll-target="#country-comparison">Country Comparison</a>
+  <ul class="collapse">
+  <li><a href="#wage-1" id="toc-wage-1" class="nav-link" data-scroll-target="#wage-1">Wage</a></li>
+  <li><a href="#education-attainment" id="toc-education-attainment" class="nav-link" data-scroll-target="#education-attainment">Education Attainment</a></li>
+  <li><a href="#employment-rate" id="toc-employment-rate" class="nav-link" data-scroll-target="#employment-rate">Employment Rate</a></li>
+  </ul></li>
+  <li><a href="#n-400-word-cloud" id="toc-n-400-word-cloud" class="nav-link" data-scroll-target="#n-400-word-cloud">N-400 Word Cloud</a></li>
+  <li><a href="#mpi-word-cloud" id="toc-mpi-word-cloud" class="nav-link" data-scroll-target="#mpi-word-cloud">MPI Word Cloud</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_gathering.html">Preparation</a></li><li class="breadcrumb-item"><a href="./eda.html">Data Exploration</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Data Exploration</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Exploratory Data Analysis (EDA) is an important step to see the general trends or to get an insight of the dataset. Visulization will provide an evidence of possible patterns or outlilers that need to be dealt with. US Census, World Bank, and OECE data will be used to see the differences between immigrants and native-borns. USCIS and MPI data will be visulized as a word cloud to see the frequency of words used.</p>
+<hr>
+<section id="general-trends" class="level1">
+<h1>General Trends</h1>
+<div id="cell-4" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Data Preparation</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>sns.set_theme(palette<span class="op">=</span><span class="st">"Set2"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Read data</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>wage <span class="op">=</span> pd.read_csv(<span class="st">"./data/wage_cleaned.csv"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>employment <span class="op">=</span> pd.read_csv(<span class="st">"./data/employment_cleaned.csv"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>education <span class="op">=</span> pd.read_csv(<span class="st">"./data/education_cleaned.csv"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>acs <span class="op">=</span> pd.read_csv(<span class="st">"./data/acs_cleaned.csv"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Set necessary categorical variables</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>acs[<span class="st">'NATIVITY'</span>] <span class="op">=</span> acs[<span class="st">'NATIVITY'</span>].astype(<span class="st">'category'</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>acs[<span class="st">'POBP'</span>] <span class="op">=</span> acs[<span class="st">'POBP'</span>].astype(<span class="st">'category'</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>acs[<span class="st">'DECADE'</span>] <span class="op">=</span> acs[<span class="st">'DECADE'</span>].astype(<span class="st">'category'</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>acs[<span class="st">'ENG'</span>] <span class="op">=</span> acs[<span class="st">'ENG'</span>].astype(<span class="st">'category'</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>acs[<span class="st">'MAR'</span>] <span class="op">=</span> acs[<span class="st">'MAR'</span>].astype(<span class="st">'category'</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>acs[<span class="st">'RAC1P'</span>] <span class="op">=</span> acs[<span class="st">'RAC1P'</span>].astype(<span class="st">'category'</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>acs[<span class="st">'SEX'</span>] <span class="op">=</span> acs[<span class="st">'SEX'</span>].astype(<span class="st">'category'</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>acs[<span class="st">'ESR'</span>] <span class="op">=</span> acs[<span class="st">'ESR'</span>].astype(<span class="st">'category'</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>acs[<span class="st">'SCHL'</span>] <span class="op">=</span> acs[<span class="st">'SCHL'</span>].astype(<span class="st">'category'</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>acs[<span class="st">'SUCCESS'</span>] <span class="op">=</span> acs[<span class="st">'SUCCESS'</span>].astype(<span class="st">'category'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cell-5" class="cell" data-execution_count="17">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">5</span>,<span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>,<span class="dv">16</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"ENG"</span>, data<span class="op">=</span>acs[acs[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">1</span>], stat<span class="op">=</span><span class="st">"percent"</span>, label<span class="op">=</span><span class="st">"Native-borns"</span>, ax<span class="op">=</span>axs[<span class="dv">0</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">'English Proficiency'</span>, title<span class="op">=</span><span class="st">'Native-borns'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"ENG"</span>, data<span class="op">=</span>acs[acs[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">2</span>], hue<span class="op">=</span><span class="st">"NATIVITY"</span>, label<span class="op">=</span><span class="st">"Immigrants"</span>, stat<span class="op">=</span><span class="st">"percent"</span>,ax<span class="op">=</span>axs[<span class="dv">0</span>,<span class="dv">1</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">'English Proficiency'</span>, title<span class="op">=</span><span class="st">'Immigrants'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"RAC1P"</span>, data<span class="op">=</span>acs[acs[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">1</span>], stat<span class="op">=</span><span class="st">"percent"</span>,label<span class="op">=</span><span class="st">"Native-borns"</span>,ax<span class="op">=</span>axs[<span class="dv">1</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Racial Categories"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"RAC1P"</span>, data<span class="op">=</span>acs[acs[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">2</span>], hue<span class="op">=</span><span class="st">"NATIVITY"</span>, label<span class="op">=</span><span class="st">"Immigrants"</span>,stat<span class="op">=</span><span class="st">"percent"</span>,ax<span class="op">=</span>axs[<span class="dv">1</span>,<span class="dv">1</span>],legend<span class="op">=</span><span class="va">False</span>).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Racial Categories"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"SCHL"</span>, data<span class="op">=</span>acs[acs[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">1</span>], stat<span class="op">=</span><span class="st">"percent"</span>,label<span class="op">=</span><span class="st">"Native-borns"</span>,ax<span class="op">=</span>axs[<span class="dv">2</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Education Attainment"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"SCHL"</span>, data<span class="op">=</span>acs[acs[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">2</span>], hue<span class="op">=</span><span class="st">"NATIVITY"</span>, label<span class="op">=</span><span class="st">"Immigrants"</span>, stat<span class="op">=</span><span class="st">"percent"</span>,ax<span class="op">=</span>axs[<span class="dv">2</span>,<span class="dv">1</span>],legend<span class="op">=</span><span class="va">False</span>).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Education Attainment"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"MAR"</span>, data<span class="op">=</span>acs[acs[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">1</span>], stat<span class="op">=</span><span class="st">"percent"</span>,label<span class="op">=</span><span class="st">"Native-borns"</span>,ax<span class="op">=</span>axs[<span class="dv">3</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Marital Status"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"MAR"</span>, data<span class="op">=</span>acs[acs[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">2</span>], hue<span class="op">=</span><span class="st">"NATIVITY"</span>, label<span class="op">=</span><span class="st">"Immigrants"</span>, stat<span class="op">=</span><span class="st">"percent"</span>,ax<span class="op">=</span>axs[<span class="dv">3</span>,<span class="dv">1</span>],legend<span class="op">=</span><span class="va">False</span>).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Marital Status"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"ESR"</span>, data<span class="op">=</span>acs[acs[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">1</span>], stat<span class="op">=</span><span class="st">"percent"</span>,label<span class="op">=</span><span class="st">"Native-borns"</span>,ax<span class="op">=</span>axs[<span class="dv">4</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Employment Status"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"ESR"</span>, data<span class="op">=</span>acs[acs[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">2</span>], hue<span class="op">=</span><span class="st">"NATIVITY"</span>, label<span class="op">=</span><span class="st">"Immigrants"</span>, stat<span class="op">=</span><span class="st">"percent"</span>,ax<span class="op">=</span>axs[<span class="dv">4</span>,<span class="dv">1</span>],legend<span class="op">=</span><span class="va">False</span>).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Employment Status"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">0</span>].legend()</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">1</span>].legend()</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">"Feature Comparison between Native-borns and Immigrants"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p><strong>English Proficiency</strong><br>
+More than 90% of native-borns speaks only English(0). Among immigrants, only 40% responded that they speak English very well(1).</p></li>
+<li><p><strong>Racial Category</strong><br>
+On racial categories, “White alone” (1) was the majority among native-borns, yet “Asian alone”(6) is the majority followed by “White alone”(1) and “Two or More Races”(9) among immigrants.</p></li>
+<li><p><strong>Education Attainment</strong><br>
+In terms of education attainment, there are more people who got Bachelor’s degree(21) in immigrants than native-borns. This is opposite on “Regular high school diploma”(16).</p></li>
+<li><p><strong>Marital Status</strong><br>
+When it comes to marital status and employment status, both immigrants and native-borns have similar distribution. However, there are slightly more percentage of “Never married”(5) people on native-borns, having “Mariied”(1) as the highest for native-borns and immigrants.</p></li>
+<li><p><strong>Employmeny Status</strong><br>
+Lastly, 50% of both native-borns and immigrants are “Civilian employed, at work”(1) followed by “Not in Labor Force”(6).</p></li>
+</ul>
+<section id="wage" class="level3">
+<h3 class="anchored" data-anchor-id="wage">Wage</h3>
+<div id="cell-8" class="cell" data-execution_count="40">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">"WAGP"</span>,y<span class="op">=</span><span class="st">"NATIVITY"</span>,hue<span class="op">=</span><span class="st">"NATIVITY"</span>,data<span class="op">=</span>acs)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Wage($)"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As the plot shows, the wage column has many extreme values. Log normalization is used here to make more general by scaling the data into narrower range.</p>
+<div id="cell-10" class="cell" data-execution_count="31">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>acs.loc[acs[<span class="st">'WAGP'</span>] <span class="op">==</span> <span class="dv">0</span>, <span class="st">'WAGP'</span>] <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>acs[<span class="st">"NORM_WAGP"</span>] <span class="op">=</span> np.log(acs[<span class="st">"WAGP"</span>])</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The median wage difference between native-borns and immigrants is"</span>,np.exp(acs[acs[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">2</span>][<span class="st">"NORM_WAGP"</span>].median())<span class="op">-</span>np.exp(acs[acs[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">1</span>][<span class="st">"NORM_WAGP"</span>].median()),<span class="st">"in US dollars."</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">"NORM_WAGP"</span>,y<span class="op">=</span><span class="st">"NATIVITY"</span>,hue<span class="op">=</span><span class="st">"NATIVITY"</span>,data<span class="op">=</span>acs)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Normalized Wage"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>The median wage difference between native-borns and immigrants is 4100.0 in US dollars.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_files/figure-html/cell-5-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now we can see the difference on median wage between native-borns and immigrants is clearer than before. However there is no large difference.</p>
+</section>
+<section id="wage-vs-other-indicators" class="level3">
+<h3 class="anchored" data-anchor-id="wage-vs-other-indicators">Wage vs Other indicators</h3>
+<div id="cell-13" class="cell" data-execution_count="39">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">3</span>,<span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">16</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sns.pointplot(data<span class="op">=</span>acs, x<span class="op">=</span><span class="st">"SEX"</span>, y<span class="op">=</span><span class="st">"NORM_WAGP"</span>, hue<span class="op">=</span><span class="st">"NATIVITY"</span>, ax<span class="op">=</span>axs[<span class="dv">0</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Sex"</span>, ylabel <span class="op">=</span> <span class="st">"Normalized Wage"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>sns.pointplot(data<span class="op">=</span>acs, x<span class="op">=</span><span class="st">"ENG"</span>, y<span class="op">=</span><span class="st">"NORM_WAGP"</span>, hue<span class="op">=</span><span class="st">"NATIVITY"</span>, ax<span class="op">=</span>axs[<span class="dv">1</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"English Proficiency"</span>, ylabel <span class="op">=</span> <span class="st">"Normalized Wage"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>sns.pointplot(data<span class="op">=</span>acs, x<span class="op">=</span><span class="st">"MAR"</span>, y<span class="op">=</span><span class="st">"NORM_WAGP"</span>, hue<span class="op">=</span><span class="st">"NATIVITY"</span>, ax<span class="op">=</span>axs[<span class="dv">2</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Marital Status"</span>, ylabel <span class="op">=</span> <span class="st">"Normalized Wage"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>sns.pointplot(data<span class="op">=</span>acs, x<span class="op">=</span><span class="st">"RAC1P"</span>, y<span class="op">=</span><span class="st">"NORM_WAGP"</span>, hue<span class="op">=</span><span class="st">"NATIVITY"</span>, ax<span class="op">=</span>axs[<span class="dv">0</span>,<span class="dv">1</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Racial Categories"</span>, ylabel <span class="op">=</span> <span class="st">"Normalized Wage"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>sns.pointplot(data<span class="op">=</span>acs, x<span class="op">=</span><span class="st">"SCHL"</span>, y<span class="op">=</span><span class="st">"NORM_WAGP"</span>, hue<span class="op">=</span><span class="st">"NATIVITY"</span>, ax<span class="op">=</span>axs[<span class="dv">1</span>,<span class="dv">1</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Education Attainment"</span>, ylabel <span class="op">=</span> <span class="st">"Normalized Wage"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>sns.pointplot(data<span class="op">=</span>acs, x<span class="op">=</span><span class="st">"ESR"</span>, y<span class="op">=</span><span class="st">"NORM_WAGP"</span>, hue<span class="op">=</span><span class="st">"NATIVITY"</span>, ax<span class="op">=</span>axs[<span class="dv">2</span>,<span class="dv">1</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Employment Status"</span>, ylabel <span class="op">=</span> <span class="st">"Normalized Wage"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">"Normalized Wage vs Other Indicators"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p><strong>Sex</strong><br>
+Being a female(2) doesn’t impact on wage on both native-borns and immigrants, but being a male(1) leads to higher wage on immigrants.</p></li>
+<li><p><strong>Racial Category</strong><br>
+“White alone”(1), “Asian alone”(6), and “Two or More Races”(9) native-borns earn more wage than those of immigrants. For immigrants, “Alaska Native alone”(4) group has very high wage than any other combinations followed by “Black or African American alone”(2).</p></li>
+<li><p><strong>English Proficiency</strong><br>
+Immigrants are making more money if they can speak English well enough(0-2). However, if they don’t speak well(3-4), native-borns are making more money.</p></li>
+<li><p><strong>Education Attainment</strong><br>
+On almost every category of education attainment, immigrants earns more wage than native-borns. There are couple things to note. First, there is a quite high wage on people who only finished “Nursery school, preschool”(2). Second, “Bachelor’s degree”(21) and “Associate’s degree”(20) are the only locations where native-borns can compete with immigrants regarding their wage.</p></li>
+<li><p><strong>Marital Status</strong><br>
+Similar to education attainment, immigrants have higher wage in all possible marital status. Being “Widowed”(2) has a significant disadvantage in wage and being “Never married”(5) has a significant advantage in wage.</p></li>
+<li><p><strong>Employment Status</strong><br>
+There is no huge difference in wage between native-borns and immigrants based on their employment status. Employed in “Armed Forces”(4,5) has a high wage value followed by “Civilian employed, at work”(1).</p></li>
+</ul>
+</section>
+</section>
+<section id="country-comparison" class="level1">
+<h1>Country Comparison</h1>
+<p>Since each immigrant comes from different place, the comparison with origin countries brings different perspectives of the success. In this section, we are looking at four different countries, Mexico, Colombia, Canada, and Korea, on their nationa average of wage, education attainment, and employment rate.</p>
+<section id="wage-1" class="level3">
+<h3 class="anchored" data-anchor-id="wage-1">Wage</h3>
+<div id="cell-18" class="cell" data-execution_count="48">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>acs[<span class="st">"SCHL"</span>] <span class="op">=</span> acs[<span class="st">"SCHL"</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>kor <span class="op">=</span> acs[acs[<span class="st">"POBP"</span>]<span class="op">==</span><span class="st">"Korea"</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>mex <span class="op">=</span> acs[acs[<span class="st">"POBP"</span>]<span class="op">==</span><span class="st">"Mexico"</span>]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>col <span class="op">=</span> acs[acs[<span class="st">"POBP"</span>]<span class="op">==</span><span class="st">"Colombia"</span>]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>can <span class="op">=</span> acs[acs[<span class="st">"POBP"</span>]<span class="op">==</span><span class="st">"Canada"</span>]</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">9</span>))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">"NORM_WAGP"</span>, y<span class="op">=</span> <span class="st">"NATIVITY"</span>, hue<span class="op">=</span><span class="st">'NATIVITY'</span>, data<span class="op">=</span>kor, ax <span class="op">=</span> axs[<span class="dv">0</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Normalized Wage"</span>, title <span class="op">=</span> <span class="st">"Korea"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">"NORM_WAGP"</span>, y<span class="op">=</span> <span class="st">"NATIVITY"</span>, hue<span class="op">=</span><span class="st">'NATIVITY'</span>, data<span class="op">=</span>mex, ax <span class="op">=</span> axs[<span class="dv">1</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Normalized Wage"</span>, title <span class="op">=</span> <span class="st">"Mexico"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">"NORM_WAGP"</span>, y<span class="op">=</span> <span class="st">"NATIVITY"</span>, hue<span class="op">=</span><span class="st">'NATIVITY'</span>, data<span class="op">=</span>col, ax <span class="op">=</span> axs[<span class="dv">0</span>,<span class="dv">1</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Normalized Wage"</span>, title <span class="op">=</span> <span class="st">"Colombia"</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">"NORM_WAGP"</span>, y<span class="op">=</span> <span class="st">"NATIVITY"</span>, hue<span class="op">=</span><span class="st">'NATIVITY'</span>, data<span class="op">=</span>can, ax <span class="op">=</span> axs[<span class="dv">1</span>,<span class="dv">1</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Normalized Wage"</span>, title <span class="op">=</span> <span class="st">"Canada"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">0</span>].axvline(x<span class="op">=</span>np.log(wage[wage.country <span class="op">==</span> <span class="st">"Korea"</span>].iloc[<span class="dv">0</span>,<span class="dv">31</span>]), color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>,label <span class="op">=</span> <span class="st">"National Average"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>,<span class="dv">0</span>].axvline(x<span class="op">=</span>np.log(wage[wage.country <span class="op">==</span> <span class="st">"Mexico"</span>].iloc[<span class="dv">0</span>,<span class="dv">31</span>]), color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label <span class="op">=</span> <span class="st">"National Average"</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">1</span>].axvline(x<span class="op">=</span>np.log(wage[wage.country <span class="op">==</span> <span class="st">"Colombia"</span>].iloc[<span class="dv">0</span>,<span class="dv">31</span>]), color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label <span class="op">=</span> <span class="st">"National Average"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>,<span class="dv">1</span>].axvline(x<span class="op">=</span>np.log(wage[wage.country <span class="op">==</span> <span class="st">"Canada"</span>].iloc[<span class="dv">0</span>,<span class="dv">31</span>]), color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label <span class="op">=</span> <span class="st">"National Average"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">0</span>].legend()</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>,<span class="dv">0</span>].legend()</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">1</span>].legend()</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>,<span class="dv">1</span>].legend()</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">"Origin Country Comparison on Normalized Wage"</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Red lines represent national averages on each countries. Both native-borns and immigrants from all those four countries have less median wage than their origin residents. As addressed in the prior research in introduction, immigrants from Korea and Canada, relatively more developed countries than Mexico and Colombia, have less median wage than native-borns and even people from Colombia and Mexico.</p>
+</section>
+<section id="education-attainment" class="level3">
+<h3 class="anchored" data-anchor-id="education-attainment">Education Attainment</h3>
+<div id="cell-21" class="cell" data-execution_count="57">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>kor[<span class="st">"edu"</span>] <span class="op">=</span> np.select([kor[<span class="st">"SCHL"</span>] <span class="op">&lt;</span> <span class="dv">19</span>, kor[<span class="st">"SCHL"</span>] <span class="op">&gt;=</span> <span class="dv">19</span>], [<span class="st">"Below"</span>, <span class="st">"Upper"</span>], default<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mex[<span class="st">"edu"</span>] <span class="op">=</span> np.select([mex[<span class="st">"SCHL"</span>] <span class="op">&lt;</span> <span class="dv">19</span>, mex[<span class="st">"SCHL"</span>] <span class="op">&gt;=</span> <span class="dv">19</span>], [<span class="st">"Below"</span>, <span class="st">"Upper"</span>], default<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>col[<span class="st">"edu"</span>] <span class="op">=</span> np.select([col[<span class="st">"SCHL"</span>] <span class="op">&lt;</span> <span class="dv">19</span>, col[<span class="st">"SCHL"</span>] <span class="op">&gt;=</span> <span class="dv">19</span>], [<span class="st">"Below"</span>, <span class="st">"Upper"</span>], default<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>can[<span class="st">"edu"</span>] <span class="op">=</span> np.select([can[<span class="st">"SCHL"</span>] <span class="op">&lt;</span> <span class="dv">19</span>, can[<span class="st">"SCHL"</span>] <span class="op">&gt;=</span> <span class="dv">19</span>], [<span class="st">"Below"</span>, <span class="st">"Upper"</span>], default<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">9</span>))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"edu"</span>, stat<span class="op">=</span><span class="st">'percent'</span>, hue<span class="op">=</span><span class="st">"NATIVITY"</span>, data<span class="op">=</span>kor[kor[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">2</span>],ax<span class="op">=</span>axs[<span class="dv">0</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Education Attainment"</span>, title <span class="op">=</span> <span class="st">"Korea"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"edu"</span>, stat<span class="op">=</span><span class="st">'percent'</span>, hue<span class="op">=</span><span class="st">"NATIVITY"</span>, data<span class="op">=</span>mex[mex[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">2</span>],ax<span class="op">=</span>axs[<span class="dv">1</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Education Attainment"</span>, title <span class="op">=</span> <span class="st">"Mexico"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"edu"</span>, stat<span class="op">=</span><span class="st">'percent'</span>, hue<span class="op">=</span><span class="st">"NATIVITY"</span>, data<span class="op">=</span>col[col[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">2</span>],ax<span class="op">=</span>axs[<span class="dv">0</span>,<span class="dv">1</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Education Attainment"</span>, title <span class="op">=</span> <span class="st">"Colombia"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"edu"</span>, stat<span class="op">=</span><span class="st">'percent'</span>, hue<span class="op">=</span><span class="st">"NATIVITY"</span>, data<span class="op">=</span>can[can[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">2</span>],ax<span class="op">=</span>axs[<span class="dv">1</span>,<span class="dv">1</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Education Attainment"</span>, title <span class="op">=</span> <span class="st">"Canada"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">0</span>].axhline(y<span class="op">=</span>(education[education[<span class="st">"country"</span>]<span class="op">==</span><span class="st">"Korea"</span>].iloc[<span class="dv">1</span>,<span class="dv">32</span>]), color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>,label<span class="op">=</span><span class="st">"Below tertiary"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">0</span>].axhline(y<span class="op">=</span>(education[education[<span class="st">"country"</span>]<span class="op">==</span><span class="st">"Korea"</span>].iloc[<span class="dv">2</span>,<span class="dv">32</span>]), color<span class="op">=</span><span class="st">'green'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>,label<span class="op">=</span><span class="st">"Upper tertiary"</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>,<span class="dv">0</span>].axhline(y<span class="op">=</span>(education[education[<span class="st">"country"</span>]<span class="op">==</span><span class="st">"Mexico"</span>].iloc[<span class="dv">1</span>,<span class="dv">32</span>]), color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>,label<span class="op">=</span><span class="st">"Below tertiary"</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>,<span class="dv">0</span>].axhline(y<span class="op">=</span>(education[education[<span class="st">"country"</span>]<span class="op">==</span><span class="st">"Mexico"</span>].iloc[<span class="dv">2</span>,<span class="dv">32</span>]), color<span class="op">=</span><span class="st">'green'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>,label<span class="op">=</span><span class="st">"Upper tertiary"</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">1</span>].axhline(y<span class="op">=</span>(education[education[<span class="st">"country"</span>]<span class="op">==</span><span class="st">"Colombia"</span>].iloc[<span class="dv">1</span>,<span class="dv">32</span>]), color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>,label<span class="op">=</span><span class="st">"Below tertiary"</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">1</span>].axhline(y<span class="op">=</span>(education[education[<span class="st">"country"</span>]<span class="op">==</span><span class="st">"Colombia"</span>].iloc[<span class="dv">2</span>,<span class="dv">32</span>]), color<span class="op">=</span><span class="st">'green'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>,label<span class="op">=</span><span class="st">"Upper tertiary"</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>,<span class="dv">1</span>].axhline(y<span class="op">=</span>(education[education[<span class="st">"country"</span>]<span class="op">==</span><span class="st">"Canada"</span>].iloc[<span class="dv">1</span>,<span class="dv">32</span>]), color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>,label<span class="op">=</span><span class="st">"Below tertiary"</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>,<span class="dv">1</span>].axhline(y<span class="op">=</span>(education[education[<span class="st">"country"</span>]<span class="op">==</span><span class="st">"Canada"</span>].iloc[<span class="dv">2</span>,<span class="dv">32</span>]), color<span class="op">=</span><span class="st">'green'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>,label<span class="op">=</span><span class="st">"Upper tertiary"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">0</span>].legend()</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>,<span class="dv">0</span>].legend()</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">1</span>].legend()</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>,<span class="dv">1</span>].legend()</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">"Origin Country Comparison on Education Attainment (Only immigrants)"</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Korea and Canada has similar trends in education attainment. Immigrants from both countries has higher percentage of getting upper tertiary education than below tertiary education. This trend is same for their national average. Yet, immigrants have higher average of upper tertiary education than their national average. On the other hand, Mexican and Colombian immigrants have higher education attainment than their national resident in both below and upper tertiary education.</p>
+</section>
+<section id="employment-rate" class="level3">
+<h3 class="anchored" data-anchor-id="employment-rate">Employment Rate</h3>
+<div id="cell-24" class="cell" data-execution_count="93">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>kor[<span class="st">"employment"</span>] <span class="op">=</span> np.select([kor[<span class="st">"ESR"</span>].isin([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">5</span>]), kor[<span class="st">"ESR"</span>].isin([<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">6</span>])], [<span class="st">"Employed"</span>, <span class="st">"Unemployed"</span>], default<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mex[<span class="st">"employment"</span>] <span class="op">=</span> np.select([mex[<span class="st">"ESR"</span>].isin([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">5</span>]), mex[<span class="st">"ESR"</span>].isin([<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">6</span>])], [<span class="st">"Employed"</span>, <span class="st">"Unemployed"</span>], default<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>col[<span class="st">"employment"</span>] <span class="op">=</span> np.select([col[<span class="st">"ESR"</span>].isin([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">5</span>]), col[<span class="st">"ESR"</span>].isin([<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">6</span>])], [<span class="st">"Employed"</span>, <span class="st">"Unemployed"</span>], default<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>can[<span class="st">"employment"</span>] <span class="op">=</span> np.select([can[<span class="st">"ESR"</span>].isin([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">5</span>]), can[<span class="st">"ESR"</span>].isin([<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">6</span>])], [<span class="st">"Employed"</span>, <span class="st">"Unemployed"</span>], default<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">9</span>))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"employment"</span>, stat<span class="op">=</span><span class="st">'percent'</span>, hue<span class="op">=</span><span class="st">"NATIVITY"</span>, data<span class="op">=</span>kor[kor[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">2</span>],ax<span class="op">=</span>axs[<span class="dv">0</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Employment Status"</span>, title <span class="op">=</span> <span class="st">"Korea"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"employment"</span>, stat<span class="op">=</span><span class="st">'percent'</span>, hue<span class="op">=</span><span class="st">"NATIVITY"</span>, data<span class="op">=</span>mex[mex[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">2</span>],ax<span class="op">=</span>axs[<span class="dv">1</span>,<span class="dv">0</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Employment Status"</span>, title <span class="op">=</span> <span class="st">"Mexico"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"employment"</span>, stat<span class="op">=</span><span class="st">'percent'</span>, hue<span class="op">=</span><span class="st">"NATIVITY"</span>, data<span class="op">=</span>col[col[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">2</span>],ax<span class="op">=</span>axs[<span class="dv">0</span>,<span class="dv">1</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Employment Status"</span>, title <span class="op">=</span> <span class="st">"Colombia"</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>sns.histplot(x<span class="op">=</span><span class="st">"employment"</span>, stat<span class="op">=</span><span class="st">'percent'</span>, hue<span class="op">=</span><span class="st">"NATIVITY"</span>, data<span class="op">=</span>can[can[<span class="st">"NATIVITY"</span>]<span class="op">==</span><span class="dv">2</span>],ax<span class="op">=</span>axs[<span class="dv">1</span>,<span class="dv">1</span>]).<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Employment Status"</span>, title <span class="op">=</span> <span class="st">"Canada"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">0</span>].axhline(y<span class="op">=</span>employment[employment[<span class="st">"country"</span>] <span class="op">==</span> <span class="st">"Korea"</span>].iloc[<span class="dv">0</span>,<span class="dv">31</span>], color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>,label <span class="op">=</span> <span class="st">"National Average"</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>,<span class="dv">0</span>].axhline(y<span class="op">=</span>employment[employment[<span class="st">"country"</span>] <span class="op">==</span> <span class="st">"Mexico"</span>].iloc[<span class="dv">0</span>,<span class="dv">31</span>], color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>,label <span class="op">=</span> <span class="st">"National Average"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">1</span>].axhline(y<span class="op">=</span>employment[employment[<span class="st">"country"</span>] <span class="op">==</span> <span class="st">"Colombia"</span>].iloc[<span class="dv">0</span>,<span class="dv">31</span>], color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>,label <span class="op">=</span> <span class="st">"National Average"</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>,<span class="dv">1</span>].axhline(y<span class="op">=</span>employment[employment[<span class="st">"country"</span>] <span class="op">==</span> <span class="st">"Canada"</span>].iloc[<span class="dv">0</span>,<span class="dv">31</span>], color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>,label <span class="op">=</span> <span class="st">"National Average"</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">0</span>].legend()</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>,<span class="dv">0</span>].legend()</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">1</span>].legend()</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>,<span class="dv">1</span>].legend()</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">0</span>].set_ylim(<span class="dv">0</span>,<span class="dv">100</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>,<span class="dv">0</span>].set_ylim(<span class="dv">0</span>,<span class="dv">100</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">1</span>].set_ylim(<span class="dv">0</span>,<span class="dv">100</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>,<span class="dv">1</span>].set_ylim(<span class="dv">0</span>,<span class="dv">100</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">"Origin Country Comparison on Employment Rate (Only immigrants)"</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In terms of employment rate, immigration provides more employments to people from Korea and Colombia, especially all Korean immigrants are employed. Mexican immigrants have about same employment rate as Mexicana nationals. Then Canadian immigrants are less employed than Canadian nationals.</p>
+</section>
+</section>
+<section id="n-400-word-cloud" class="level1">
+<h1>N-400 Word Cloud</h1>
+<div id="cell-27" class="cell" data-execution_count="105">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> wordcloud <span class="im">import</span> WordCloud, STOPWORDS</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>words_to_remove <span class="op">=</span> [<span class="st">"information"</span>,<span class="st">"use"</span>,<span class="st">"give"</span>,<span class="st">"state"</span>,<span class="st">"provide"</span>]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the stopwords with the additional words to be removed</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>stopwords <span class="op">=</span> <span class="bu">set</span>(STOPWORDS)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>stopwords.update(words_to_remove)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>txt <span class="op">=</span> <span class="bu">open</span>(<span class="st">"data/cleaned_n_400.txt"</span>,<span class="st">'r'</span>).readlines()[<span class="dv">0</span>]</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>wordcloud <span class="op">=</span> WordCloud(</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    width <span class="op">=</span> <span class="dv">3000</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> <span class="dv">2000</span>, </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">1</span>, </span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    background_color<span class="op">=</span><span class="st">'salmon'</span>, </span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    colormap<span class="op">=</span><span class="st">'Pastel1'</span>, </span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    collocations<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    stopwords <span class="op">=</span> stopwords).generate(txt)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">30</span>, <span class="dv">20</span>))</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>plt.imshow(wordcloud) </span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Top 20 most used words"</span>)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> txt.split()</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>word_count <span class="op">=</span> Counter(words)</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> word <span class="kw">in</span> <span class="bu">list</span>(word_count):</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> word <span class="kw">in</span> words_to_remove:</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        <span class="kw">del</span> word_count[word]</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>word_count.most_common(<span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Top 20 most used words</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="105">
+<pre><code>[('address', 57),
+ ('spouse', 53),
+ ('current', 46),
+ ('foreign', 44),
+ ('date', 43),
+ ('country', 32),
+ ('child', 30),
+ ('person', 29),
+ ('application', 29),
+ ('applicant', 26),
+ ('signature', 26),
+ ('year', 25),
+ ('citizen', 25),
+ ('applicable', 25),
+ ('complete', 24),
+ ('item', 22),
+ ('birth', 22),
+ ('group', 22),
+ ('prior', 19),
+ ('family', 18)]</code></pre>
+</div>
+</div>
+<p>Form the world cloud, words like “address”, “spouse”, “child”, “citizen”, “birth” are common words that related to the indicators. This might indicates that marital status would be a good indicator deciding the success of immigrants.</p>
+</section>
+<section id="mpi-word-cloud" class="level1">
+<h1>MPI Word Cloud</h1>
+<div id="cell-30" class="cell" data-execution_count="109">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> wordcloud <span class="im">import</span> WordCloud, STOPWORDS</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>mpi <span class="op">=</span> pd.read_csv(<span class="st">"./data/MPI_cleaned.csv"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>txts <span class="op">=</span> <span class="st">" "</span>.join(<span class="bu">list</span>(mpi[<span class="st">"text"</span>]))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>words_to_remove <span class="op">=</span> [<span class="st">"immigrant"</span>,<span class="st">"bear"</span>,<span class="st">"percent"</span>,<span class="st">"mexican"</span>,<span class="st">"canadian"</span>,<span class="st">"korean"</span>,<span class="st">"canadians"</span>,<span class="st">"united"</span>,<span class="st">"states"</span>,<span class="st">"approximately"</span>,<span class="st">"figure"</span>,<span class="st">"rate"</span>,<span class="st">"colombian"</span>,<span class="st">"mexicans"</span>]</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the stopwords with the additional words to be removed</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>stopwords <span class="op">=</span> <span class="bu">set</span>(STOPWORDS)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>stopwords.update(words_to_remove)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>wordcloud <span class="op">=</span> WordCloud(</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    width <span class="op">=</span> <span class="dv">3000</span>,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> <span class="dv">2000</span>, </span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">1</span>, </span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    background_color<span class="op">=</span><span class="st">'salmon'</span>, </span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    colormap<span class="op">=</span><span class="st">'Pastel1'</span>, </span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    collocations<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    stopwords <span class="op">=</span> stopwords).generate(txts)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">30</span>, <span class="dv">20</span>))</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>plt.imshow(wordcloud) </span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Top 20 most used words"</span>)</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> txts.split()</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>word_count <span class="op">=</span> Counter(words)</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> word <span class="kw">in</span> <span class="bu">list</span>(word_count):</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> word <span class="kw">in</span> words_to_remove:</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>        <span class="kw">del</span> word_count[word]</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>word_count.most_common(<span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Top 20 most used words</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="109">
+<pre><code>[('population', 44),
+ ('compare', 34),
+ ('overall', 28),
+ ('foreign', 26),
+ ('high', 24),
+ ('age', 23),
+ ('likely', 19),
+ ('native', 19),
+ ('english', 17),
+ ('year', 17),
+ ('old', 16),
+ ('unauthorized', 12),
+ ('daca', 12),
+ ('education', 11),
+ ('student', 11),
+ ('country', 11),
+ ('adult', 10),
+ ('international', 10),
+ ('citizen', 10),
+ ('total', 10)]</code></pre>
+</div>
+</div>
+<p>We can see “age”, “english”, and “education” are pretty common words in the reports.</p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./data_cleaning.html" class="pagination-link" aria-label="Data Cleaning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Data Cleaning</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./naive_bayes.html" class="pagination-link" aria-label="Naive Bayes">
+        <span class="nav-page-text">Naive Bayes</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Success of Immigrants - Data Cleaning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./eda.html" rel="next">
+<link href="./data_gathering.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_gathering.html">Preparation</a></li><li class="breadcrumb-item"><a href="./data_cleaning.html">Data Cleaning</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Success of Immigrants</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/anly501/dsan-5000-project-briansoonwookwon.git" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Preparation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_gathering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Gathering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_cleaning.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Data Cleaning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Exploration</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./naive_bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Naive Bayes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Decision Trees</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./decision_trees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classification Trees</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression_tree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regression Trees</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clustering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dimentionality_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dimensionality Reduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Association Rule Mining</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conclusions</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#us-census-bureau" id="toc-us-census-bureau" class="nav-link active" data-scroll-target="#us-census-bureau">US Census Bureau</a></li>
+  <li><a href="#world-bank-and-oecd" id="toc-world-bank-and-oecd" class="nav-link" data-scroll-target="#world-bank-and-oecd">World Bank and OECD</a>
+  <ul class="collapse">
+  <li><a href="#employment-rate" id="toc-employment-rate" class="nav-link" data-scroll-target="#employment-rate">Employment rate</a></li>
+  <li><a href="#annual-average-wage" id="toc-annual-average-wage" class="nav-link" data-scroll-target="#annual-average-wage">Annual average wage</a></li>
+  <li><a href="#adult-education-attainment-rate" id="toc-adult-education-attainment-rate" class="nav-link" data-scroll-target="#adult-education-attainment-rate">Adult education attainment rate</a></li>
+  </ul></li>
+  <li><a href="#uscis" id="toc-uscis" class="nav-link" data-scroll-target="#uscis">USCIS</a></li>
+  <li><a href="#migration-policy-institute" id="toc-migration-policy-institute" class="nav-link" data-scroll-target="#migration-policy-institute">Migration Policy Institute</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_gathering.html">Preparation</a></li><li class="breadcrumb-item"><a href="./data_cleaning.html">Data Cleaning</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Data Cleaning</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Data cleaning is essential step of any data science project. This section will show the process of cleaning and the reasoning in terms of integration. Because the data are from various sources, the integration is necessary and this step will make further data analysis smoother by improving the quality of data.</p>
+<hr>
+<section id="us-census-bureau" class="level1">
+<h1>US Census Bureau</h1>
+<p>In raw Census data, POBP column is recoded as numbers, not actual places as strings. Those numbers are changed to actual countries names using meta data of that variable for later analysis. For the data integration, “United Kingdom, Not Specified”, “Scotland”, and “England” are all merged into “United Kingdom” and all U.S. territories are labeled as “United States”. Lastly, <code>Success</code> column is created based on their <code>WAGP</code> and <code>SCHL</code> value. If they are making more money than 100000 or attained more than Bachelor’s degree, they are considered “successful”. Finally, whoever is not a citizen is removed from the dataset because they are not part of the project.</p>
+<div id="cell-5" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>meta <span class="op">=</span> requests.get(<span class="st">"https://api.census.gov/data/2021/acs/acs1/pums/variables/POBP.json"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>meta <span class="op">=</span> meta.json()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Get recoded values for POBP column</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>codes <span class="op">=</span> meta[<span class="st">"values"</span>][<span class="st">"item"</span>]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>codes <span class="op">=</span> {<span class="bu">int</span>(key): value <span class="cf">for</span> key, value <span class="kw">in</span> codes.items()}</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>acs_raw <span class="op">=</span> pd.read_csv(<span class="st">"./data/acs_raw.csv"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Change country codes to names</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(acs_raw)):</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Combine "United Kingdom, Not Specified", "Scotland", "England" into one value</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> acs_raw.loc[i,<span class="st">"POBP"</span>] <span class="kw">in</span> [<span class="dv">138</span>,<span class="dv">139</span>,<span class="dv">140</span>]: </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        acs_raw.loc[i,<span class="st">"POBP"</span>] <span class="op">=</span> <span class="st">"United Kingdom"</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Change all the U.S. territories to "United States"</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> acs_raw.loc[i,<span class="st">"POBP"</span>] <span class="op">&lt;</span> <span class="dv">100</span>:</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        acs_raw.loc[i,<span class="st">"POBP"</span>] <span class="op">=</span> <span class="st">"United States"</span>       </span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        acs_raw.loc[i,<span class="st">"POBP"</span>] <span class="op">=</span> codes[acs_raw.loc[i,<span class="st">"POBP"</span>]]</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Create success variable</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>condition1 <span class="op">=</span> acs_raw[<span class="st">"WAGP"</span>] <span class="op">&gt;</span> <span class="dv">100000</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>condition2 <span class="op">=</span> acs_raw[<span class="st">"SCHL"</span>] <span class="op">&gt;=</span> <span class="dv">21</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>acs_raw[<span class="st">"SUCCESS"</span>] <span class="op">=</span> np.select([condition1, condition2], [<span class="dv">1</span>,<span class="dv">1</span>], default<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Exclude non-citizens</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>acs_raw <span class="op">=</span> acs_raw[acs_raw[<span class="st">"CIT"</span>] <span class="op">!=</span> <span class="dv">5</span>]</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>acs_raw <span class="op">=</span> acs_raw.drop([<span class="st">"CIT"</span>],axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>acs_raw.head()</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># acs_raw.to_csv("./data/acs_cleaned.csv", index = False)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">NATIVITY</th>
+<th data-quarto-table-cell-role="th">POBP</th>
+<th data-quarto-table-cell-role="th">DECADE</th>
+<th data-quarto-table-cell-role="th">ENG</th>
+<th data-quarto-table-cell-role="th">MAR</th>
+<th data-quarto-table-cell-role="th">RAC1P</th>
+<th data-quarto-table-cell-role="th">SEX</th>
+<th data-quarto-table-cell-role="th">ESR</th>
+<th data-quarto-table-cell-role="th">WAGP</th>
+<th data-quarto-table-cell-role="th">SCHL</th>
+<th data-quarto-table-cell-role="th">AGEP</th>
+<th data-quarto-table-cell-role="th">SUCCESS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>United States</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>6</td>
+<td>0</td>
+<td>11</td>
+<td>36</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1</td>
+<td>United States</td>
+<td>0</td>
+<td>0</td>
+<td>5</td>
+<td>1</td>
+<td>1</td>
+<td>6</td>
+<td>0</td>
+<td>22</td>
+<td>57</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1</td>
+<td>United States</td>
+<td>0</td>
+<td>0</td>
+<td>5</td>
+<td>5</td>
+<td>1</td>
+<td>6</td>
+<td>0</td>
+<td>14</td>
+<td>29</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1</td>
+<td>United States</td>
+<td>0</td>
+<td>0</td>
+<td>5</td>
+<td>1</td>
+<td>1</td>
+<td>6</td>
+<td>0</td>
+<td>1</td>
+<td>26</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1</td>
+<td>United States</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>6</td>
+<td>0</td>
+<td>21</td>
+<td>80</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="world-bank-and-oecd" class="level1">
+<h1>World Bank and OECD</h1>
+<p>Because average wage, employment rate, and education attainment rate dataset are from different sources, it is necessary to keep them integrated in terms of countries. Since wage dataset features the lowest number of countries, other datasets are subsetted to have only those countries using conutry codes, which leads down to 38 countries total. Then these country codes are changed to country names. Especially “Korea, Rep”, “Turkiye”, “Czechia”, are “Slovak Republic” are changed to “Korea”, “Turkey”, “Czech Republic”, and “Slovakia” so that they can be aligned with ACS data.</p>
+<div id="cell-8" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>employment_raw <span class="op">=</span> read.csv(<span class="st">"./data/employment_raw.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>wage_raw <span class="op">=</span> read.csv(<span class="st">"./data/wage_raw.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>education_raw <span class="op">=</span> read.csv(<span class="st">"./data/education_raw.csv"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Subsetting dataset on common countries</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>education_raw <span class="op">=</span> education_raw[education_raw$iso3c <span class="op">%</span><span class="kw">in</span><span class="op">%</span> wage_raw$iso3c,]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>employment_raw <span class="op">=</span> employment_raw[employment_raw$iso3c <span class="op">%</span><span class="kw">in</span><span class="op">%</span> wage_raw$iso3c,]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Putting country names by country codes</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>country_code <span class="op">=</span> employment_raw[,c(<span class="dv">1</span>,<span class="dv">2</span>)]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>colnames(country_code) <span class="op">=</span> c(<span class="st">"iso3c"</span>,<span class="st">"country"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>education_raw <span class="op">=</span> merge(education_raw, country_code, by <span class="op">=</span> <span class="st">"iso3c"</span>, <span class="bu">all</span> <span class="op">=</span> TRUE)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>wage_raw <span class="op">=</span> merge(wage_raw, country_code, by <span class="op">=</span> <span class="st">"iso3c"</span>, <span class="bu">all</span> <span class="op">=</span> TRUE)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Change name of certain countries so that it can be same in acs dataset</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="kw">in</span> <span class="dv">1</span>:length(employment_raw$country)){</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(employment_raw$country[i]<span class="op">==</span><span class="st">"Korea, Rep."</span>){</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        employment_raw$country[i] <span class="op">=</span> <span class="st">"Korea"</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(employment_raw$country[i]<span class="op">==</span><span class="st">"Turkiye"</span>){</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        employment_raw$country[i] <span class="op">=</span> <span class="st">"Turkey"</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(employment_raw$country[i]<span class="op">==</span> <span class="st">"Czechia"</span>){</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        employment_raw$country[i] <span class="op">=</span> <span class="st">"Czech Republic"</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(employment_raw$country[i]<span class="op">==</span> <span class="st">"Slovak Republic"</span>){</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        employment_raw$country[i] <span class="op">=</span> <span class="st">"Slovakia"</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="kw">in</span> <span class="dv">1</span>:length(wage_raw$country)){</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(wage_raw$country[i]<span class="op">==</span><span class="st">"Korea, Rep."</span>){</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        wage_raw$country[i] <span class="op">=</span> <span class="st">"Korea"</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(wage_raw$country[i]<span class="op">==</span><span class="st">"Turkiye"</span>){</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        wage_raw$country[i] <span class="op">=</span> <span class="st">"Turkey"</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(wage_raw$country[i]<span class="op">==</span> <span class="st">"Czechia"</span>){</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>        wage_raw$country[i] <span class="op">=</span> <span class="st">"Czech Republic"</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(wage_raw$country[i]<span class="op">==</span> <span class="st">"Slovak Republic"</span>){</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        wage_raw$country[i] <span class="op">=</span> <span class="st">"Slovakia"</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="kw">in</span> <span class="dv">1</span>:length(education_raw$country)) {</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (education_raw$country[i] <span class="op">==</span> <span class="st">"Korea, Rep."</span>) {</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>        education_raw$country[i] <span class="op">=</span> <span class="st">"Korea"</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (education_raw$country[i] <span class="op">==</span> <span class="st">"Turkiye"</span>) {</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>        education_raw$country[i] <span class="op">=</span> <span class="st">"Turkey"</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (education_raw$country[i] <span class="op">==</span> <span class="st">"Czechia"</span>) {</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>        education_raw$country[i] <span class="op">=</span> <span class="st">"Czech Republic"</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (education_raw$country[i] <span class="op">==</span> <span class="st">"Slovak Republic"</span>) {</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>        education_raw$country[i] <span class="op">=</span> <span class="st">"Slovakia"</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete country code column</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>employment_raw <span class="op">=</span> employment_raw[,<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>wage_raw <span class="op">=</span> wage_raw[,<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>education_raw <span class="op">=</span> education_raw[,<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Rearrange the column order</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>employment_raw <span class="op">=</span> employment_raw[,c(tail(sort(colnames(employment_raw)), <span class="dv">1</span>), head(sort(colnames(employment_raw)), <span class="op">-</span><span class="dv">1</span>))]</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>wage_raw <span class="op">=</span> wage_raw[,c(tail(sort(colnames(wage_raw)), <span class="dv">1</span>), head(sort(colnames(wage_raw)), <span class="op">-</span><span class="dv">1</span>))]</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>education_raw <span class="op">=</span> education_raw[,c(tail(sort(colnames(education_raw)), <span class="dv">1</span>), head(sort(colnames(education_raw)), <span class="op">-</span><span class="dv">1</span>))]</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="co"># write.csv(wage_raw, file = "./data/wage_cleaned.csv", row.names = FALSE)</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="co"># write.csv(employment_raw, file = "./data/employment_cleaned.csv", row.names = FALSE)</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="co"># write.csv(education_raw, file = "./data/education_cleaned.csv", row.names = FALSE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="employment-rate" class="level3">
+<h3 class="anchored" data-anchor-id="employment-rate">Employment rate</h3>
+<div id="cell-10" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A data.frame: 6 × 32</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">country</th>
+<th data-quarto-table-cell-role="th" scope="col">X1991</th>
+<th data-quarto-table-cell-role="th" scope="col">X1992</th>
+<th data-quarto-table-cell-role="th" scope="col">X1993</th>
+<th data-quarto-table-cell-role="th" scope="col">X1994</th>
+<th data-quarto-table-cell-role="th" scope="col">X1995</th>
+<th data-quarto-table-cell-role="th" scope="col">X1996</th>
+<th data-quarto-table-cell-role="th" scope="col">X1997</th>
+<th data-quarto-table-cell-role="th" scope="col">X1998</th>
+<th data-quarto-table-cell-role="th" scope="col">X1999</th>
+<th data-quarto-table-cell-role="th" scope="col">...</th>
+<th data-quarto-table-cell-role="th" scope="col">X2012</th>
+<th data-quarto-table-cell-role="th" scope="col">X2013</th>
+<th data-quarto-table-cell-role="th" scope="col">X2014</th>
+<th data-quarto-table-cell-role="th" scope="col">X2015</th>
+<th data-quarto-table-cell-role="th" scope="col">X2016</th>
+<th data-quarto-table-cell-role="th" scope="col">X2017</th>
+<th data-quarto-table-cell-role="th" scope="col">X2018</th>
+<th data-quarto-table-cell-role="th" scope="col">X2019</th>
+<th data-quarto-table-cell-role="th" scope="col">X2020</th>
+<th data-quarto-table-cell-role="th" scope="col">X2021</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">...</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">11</td>
+<td>Australia</td>
+<td>57.091</td>
+<td>56.115</td>
+<td>55.662</td>
+<td>56.813</td>
+<td>58.158</td>
+<td>58.114</td>
+<td>57.843</td>
+<td>58.162</td>
+<td>58.448</td>
+<td>...</td>
+<td>61.749</td>
+<td>61.264</td>
+<td>60.766</td>
+<td>61.068</td>
+<td>61.166</td>
+<td>61.527</td>
+<td>62.152</td>
+<td>62.547</td>
+<td>60.829</td>
+<td>62.478</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">12</td>
+<td>Austria</td>
+<td>53.930</td>
+<td>54.558</td>
+<td>54.281</td>
+<td>56.969</td>
+<td>56.841</td>
+<td>55.714</td>
+<td>55.402</td>
+<td>55.597</td>
+<td>56.198</td>
+<td>...</td>
+<td>57.801</td>
+<td>57.667</td>
+<td>57.279</td>
+<td>57.247</td>
+<td>57.531</td>
+<td>57.843</td>
+<td>58.394</td>
+<td>58.605</td>
+<td>57.513</td>
+<td>57.380</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">19</td>
+<td>Belgium</td>
+<td>45.831</td>
+<td>46.305</td>
+<td>45.712</td>
+<td>45.473</td>
+<td>45.810</td>
+<td>45.631</td>
+<td>45.998</td>
+<td>46.111</td>
+<td>47.420</td>
+<td>...</td>
+<td>49.235</td>
+<td>49.045</td>
+<td>48.951</td>
+<td>48.789</td>
+<td>48.951</td>
+<td>50.023</td>
+<td>50.966</td>
+<td>51.475</td>
+<td>50.833</td>
+<td>51.079</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">36</td>
+<td>Canada</td>
+<td>59.709</td>
+<td>58.342</td>
+<td>57.904</td>
+<td>58.383</td>
+<td>58.669</td>
+<td>58.449</td>
+<td>58.967</td>
+<td>59.737</td>
+<td>60.563</td>
+<td>...</td>
+<td>61.652</td>
+<td>61.761</td>
+<td>61.430</td>
+<td>61.290</td>
+<td>61.110</td>
+<td>61.591</td>
+<td>61.597</td>
+<td>61.991</td>
+<td>57.964</td>
+<td>60.216</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">41</td>
+<td>Chile</td>
+<td>50.410</td>
+<td>51.885</td>
+<td>52.344</td>
+<td>51.957</td>
+<td>53.392</td>
+<td>52.434</td>
+<td>52.577</td>
+<td>52.602</td>
+<td>50.328</td>
+<td>...</td>
+<td>55.783</td>
+<td>56.074</td>
+<td>56.019</td>
+<td>56.012</td>
+<td>55.645</td>
+<td>55.774</td>
+<td>55.563</td>
+<td>55.286</td>
+<td>49.211</td>
+<td>51.788</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">43</td>
+<td>Colombia</td>
+<td>59.965</td>
+<td>60.616</td>
+<td>62.045</td>
+<td>62.113</td>
+<td>62.111</td>
+<td>60.033</td>
+<td>59.962</td>
+<td>57.909</td>
+<td>53.953</td>
+<td>...</td>
+<td>62.649</td>
+<td>62.783</td>
+<td>63.224</td>
+<td>63.713</td>
+<td>63.068</td>
+<td>62.779</td>
+<td>62.160</td>
+<td>60.759</td>
+<td>53.270</td>
+<td>55.388</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="annual-average-wage" class="level3">
+<h3 class="anchored" data-anchor-id="annual-average-wage">Annual average wage</h3>
+<div id="cell-12" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A data.frame: 6 × 32</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">country</th>
+<th data-quarto-table-cell-role="th" scope="col">X1991</th>
+<th data-quarto-table-cell-role="th" scope="col">X1992</th>
+<th data-quarto-table-cell-role="th" scope="col">X1993</th>
+<th data-quarto-table-cell-role="th" scope="col">X1994</th>
+<th data-quarto-table-cell-role="th" scope="col">X1995</th>
+<th data-quarto-table-cell-role="th" scope="col">X1996</th>
+<th data-quarto-table-cell-role="th" scope="col">X1997</th>
+<th data-quarto-table-cell-role="th" scope="col">X1998</th>
+<th data-quarto-table-cell-role="th" scope="col">X1999</th>
+<th data-quarto-table-cell-role="th" scope="col">...</th>
+<th data-quarto-table-cell-role="th" scope="col">X2012</th>
+<th data-quarto-table-cell-role="th" scope="col">X2013</th>
+<th data-quarto-table-cell-role="th" scope="col">X2014</th>
+<th data-quarto-table-cell-role="th" scope="col">X2015</th>
+<th data-quarto-table-cell-role="th" scope="col">X2016</th>
+<th data-quarto-table-cell-role="th" scope="col">X2017</th>
+<th data-quarto-table-cell-role="th" scope="col">X2018</th>
+<th data-quarto-table-cell-role="th" scope="col">X2019</th>
+<th data-quarto-table-cell-role="th" scope="col">X2020</th>
+<th data-quarto-table-cell-role="th" scope="col">X2021</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">...</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">1</td>
+<td>Australia</td>
+<td>42309.38</td>
+<td>43173.77</td>
+<td>43578.24</td>
+<td>43873.86</td>
+<td>43715</td>
+<td>44976.28</td>
+<td>46355.56</td>
+<td>46999.64</td>
+<td>48064.87</td>
+<td>...</td>
+<td>57752</td>
+<td>57579</td>
+<td>58102</td>
+<td>57744</td>
+<td>57885</td>
+<td>57619</td>
+<td>57843</td>
+<td>58620</td>
+<td>60377</td>
+<td>60681.50</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">2</td>
+<td>Austria</td>
+<td>52697.40</td>
+<td>53759.06</td>
+<td>54197.37</td>
+<td>54743.42</td>
+<td>55184</td>
+<td>54819.62</td>
+<td>54346.95</td>
+<td>56101.14</td>
+<td>57354.90</td>
+<td>...</td>
+<td>62515</td>
+<td>62568</td>
+<td>62801</td>
+<td>63231</td>
+<td>63860</td>
+<td>63856</td>
+<td>64101</td>
+<td>64623</td>
+<td>64648</td>
+<td>65402.32</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">3</td>
+<td>Belgium</td>
+<td>53018.64</td>
+<td>54718.73</td>
+<td>55868.83</td>
+<td>56952.78</td>
+<td>56759</td>
+<td>57470.56</td>
+<td>58203.38</td>
+<td>58238.28</td>
+<td>61484.41</td>
+<td>...</td>
+<td>64461</td>
+<td>65099</td>
+<td>65461</td>
+<td>65017</td>
+<td>65157</td>
+<td>64700</td>
+<td>65083</td>
+<td>65700</td>
+<td>63677</td>
+<td>65520.82</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">4</td>
+<td>Canada</td>
+<td>42426.30</td>
+<td>43045.90</td>
+<td>42952.72</td>
+<td>42464.18</td>
+<td>42369</td>
+<td>42745.09</td>
+<td>44053.77</td>
+<td>44793.21</td>
+<td>45157.23</td>
+<td>...</td>
+<td>53717</td>
+<td>54286</td>
+<td>54995</td>
+<td>55400</td>
+<td>54350</td>
+<td>55122</td>
+<td>56083</td>
+<td>56370</td>
+<td>59160</td>
+<td>59568.78</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">5</td>
+<td>Switzerland</td>
+<td>56464.63</td>
+<td>56948.80</td>
+<td>57572.46</td>
+<td>58283.21</td>
+<td>58316</td>
+<td>57610.92</td>
+<td>58645.79</td>
+<td>58814.06</td>
+<td>59892.08</td>
+<td>...</td>
+<td>69383</td>
+<td>70280</td>
+<td>70412</td>
+<td>70797</td>
+<td>70468</td>
+<td>70087</td>
+<td>69892</td>
+<td>71189</td>
+<td>69728</td>
+<td>72358.44</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">6</td>
+<td>Chile</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>17383</td>
+<td>17383.36</td>
+<td>18600.43</td>
+<td>19515.21</td>
+<td>20533.36</td>
+<td>...</td>
+<td>29661</td>
+<td>30530</td>
+<td>30657</td>
+<td>30615</td>
+<td>31834</td>
+<td>30847</td>
+<td>32348</td>
+<td>33190</td>
+<td>31369</td>
+<td>33042.33</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="adult-education-attainment-rate" class="level3">
+<h3 class="anchored" data-anchor-id="adult-education-attainment-rate">Adult education attainment rate</h3>
+<div id="cell-14" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A data.frame: 6 × 33</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">country</th>
+<th data-quarto-table-cell-role="th" scope="col">SUBJECT</th>
+<th data-quarto-table-cell-role="th" scope="col">X1991</th>
+<th data-quarto-table-cell-role="th" scope="col">X1992</th>
+<th data-quarto-table-cell-role="th" scope="col">X1993</th>
+<th data-quarto-table-cell-role="th" scope="col">X1994</th>
+<th data-quarto-table-cell-role="th" scope="col">X1995</th>
+<th data-quarto-table-cell-role="th" scope="col">X1996</th>
+<th data-quarto-table-cell-role="th" scope="col">X1997</th>
+<th data-quarto-table-cell-role="th" scope="col">X1998</th>
+<th data-quarto-table-cell-role="th" scope="col">...</th>
+<th data-quarto-table-cell-role="th" scope="col">X2012</th>
+<th data-quarto-table-cell-role="th" scope="col">X2013</th>
+<th data-quarto-table-cell-role="th" scope="col">X2014</th>
+<th data-quarto-table-cell-role="th" scope="col">X2015</th>
+<th data-quarto-table-cell-role="th" scope="col">X2016</th>
+<th data-quarto-table-cell-role="th" scope="col">X2017</th>
+<th data-quarto-table-cell-role="th" scope="col">X2018</th>
+<th data-quarto-table-cell-role="th" scope="col">X2019</th>
+<th data-quarto-table-cell-role="th" scope="col">X2020</th>
+<th data-quarto-table-cell-role="th" scope="col">X2021</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">...</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">1</td>
+<td>Australia</td>
+<td>BUPPSRY</td>
+<td>44.12706</td>
+<td>NA</td>
+<td>47.15905</td>
+<td>49.80203</td>
+<td>44.93585</td>
+<td>NA</td>
+<td>46.69527</td>
+<td>43.95596</td>
+<td>...</td>
+<td>23.56339</td>
+<td>24.28443</td>
+<td>22.89584</td>
+<td>20.98090</td>
+<td>20.06735</td>
+<td>19.01266</td>
+<td>18.10864</td>
+<td>17.13266</td>
+<td>16.24498</td>
+<td>15.46888</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">2</td>
+<td>Australia</td>
+<td>TRY</td>
+<td>31.15881</td>
+<td>NA</td>
+<td>22.46919</td>
+<td>23.07237</td>
+<td>24.31545</td>
+<td>NA</td>
+<td>24.30127</td>
+<td>25.42071</td>
+<td>...</td>
+<td>41.28236</td>
+<td>39.53993</td>
+<td>41.90185</td>
+<td>42.88876</td>
+<td>43.74390</td>
+<td>45.35567</td>
+<td>45.72748</td>
+<td>47.12998</td>
+<td>49.33745</td>
+<td>49.76787</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">3</td>
+<td>Australia</td>
+<td>UPPSRY</td>
+<td>24.71413</td>
+<td>NA</td>
+<td>30.37176</td>
+<td>27.12561</td>
+<td>30.74870</td>
+<td>NA</td>
+<td>29.00345</td>
+<td>30.62333</td>
+<td>...</td>
+<td>35.15425</td>
+<td>36.17564</td>
+<td>35.20231</td>
+<td>36.13035</td>
+<td>36.18875</td>
+<td>35.63167</td>
+<td>36.16388</td>
+<td>35.73737</td>
+<td>34.41757</td>
+<td>34.76325</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">4</td>
+<td>Austria</td>
+<td>BUPPSRY</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>...</td>
+<td>17.08353</td>
+<td>17.02800</td>
+<td>16.14400</td>
+<td>15.35130</td>
+<td>15.47159</td>
+<td>15.03758</td>
+<td>14.70253</td>
+<td>14.43586</td>
+<td>14.34133</td>
+<td>14.06036</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">5</td>
+<td>Austria</td>
+<td>TRY</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>...</td>
+<td>28.73994</td>
+<td>29.73884</td>
+<td>29.90490</td>
+<td>30.55073</td>
+<td>31.38396</td>
+<td>32.39439</td>
+<td>32.71143</td>
+<td>33.77378</td>
+<td>34.20589</td>
+<td>34.60450</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">6</td>
+<td>Austria</td>
+<td>UPPSRY</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>...</td>
+<td>54.17653</td>
+<td>53.23315</td>
+<td>53.95110</td>
+<td>54.09797</td>
+<td>53.14444</td>
+<td>52.56804</td>
+<td>52.58605</td>
+<td>51.79036</td>
+<td>51.45277</td>
+<td>51.33514</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="uscis" class="level1">
+<h1>USCIS</h1>
+<p><code>N-400</code> form is provided in pdf format. It is read through each page and converted into a whole string. These strings are tokenized by words and those words are lemmentized. Among those words unnecessary words such as “uscis”, “answer”, or “page” are removed. Then cleaned words are merged again into a whole new string.</p>
+<div id="cell-17" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> fitz</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spacy</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>nlp <span class="op">=</span> spacy.load(<span class="st">"en_core_web_sm"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a function that cleans a pdf file</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean_pdf(<span class="bu">file</span>):</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    pdf_document <span class="op">=</span> fitz.<span class="bu">open</span>(<span class="bu">file</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    pdf_txt <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Loop through each pages in the document and compile all text into one string</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> page_number <span class="kw">in</span> <span class="bu">range</span>(pdf_document.page_count):</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        page_txt <span class="op">=</span> pdf_document[page_number].get_text()</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        pdf_txt <span class="op">=</span> pdf_txt<span class="op">+</span>page_txt</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    cleaned_txt <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    doc <span class="op">=</span> nlp(pdf_txt)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Loop through each words in pdf string</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> token <span class="kw">in</span> doc:</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> token.is_alpha <span class="op">==</span> <span class="va">True</span>: <span class="co"># Check whether token is alphabet</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">len</span>(token) <span class="op">&gt;</span> <span class="dv">2</span>: <span class="co"># Remove tokens that has less then 3 characters</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> token.is_stop <span class="op">!=</span> <span class="va">True</span>: <span class="co"># Remove stop words</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                    token <span class="op">=</span> token.lemma_ <span class="co"># Lemmentize the words</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>                    token <span class="op">=</span> token.lower() <span class="co"># Change to lower case</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> token <span class="kw">not</span> <span class="kw">in</span> [<span class="st">"yes"</span>,<span class="st">"uscis"</span>,<span class="st">"answer"</span>,<span class="st">"number"</span>,<span class="st">"yyyy"</span>,<span class="st">"form"</span>,<span class="st">"edition"</span>,<span class="st">"page"</span>,<span class="st">"united"</span>,<span class="st">"states"</span>,<span class="st">"code"</span>]: <span class="co"># Remove some unnecessary words</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>                        cleaned_txt <span class="op">=</span> cleaned_txt<span class="op">+</span>token<span class="op">+</span><span class="st">" "</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cleaned_txt</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>n_400 <span class="op">=</span> clean_pdf(<span class="st">"./data/n-400.pdf"</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>n_400</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co"># with open("./data/cleaned_n_400.txt", "w") as file:</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="co">#     file.write(n_400)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>'use explain apply basis qualify military service lawful permanent resident year addition marry live citizen spouse year spouse citizen year time file lawful permanent resident year year age information eligibility select box delay enter digit date stamp remarks current legal provide nickname family give middle applicable information person apply naturalization family give exactly appear permanent resident card applicable lawful permanent resident spouse citizen citizen spouse regularly engage specify employment abroad immigration nationality act ina section residential address outside file section select field office list like naturalization interview middle applicable start type print black ink type print item applicable indicate failure question delay citizenship immigration services process note complete part action block receipt application naturalization department homeland security citizenship immigration services omb expire biological legal adoptive mother father citizen birth naturalize reach birthday citizen consider file application visit website information topic review instruction application certificate citizenship application citizenship issuance certificate section note parent citizen complete information parent application skip biographic information information person apply naturalization continue middle applicable give family type print new like use space provide like legally change read instructions decide like legally change change optional date lawful permanent resident social security applicable country citizenship nationality country birth date birth online account gender male female physical developmental disability mental impairment prevent demonstrate knowledge understanding english language civic requirement naturalization submit complete medical certification disability exceptions file exemption english language test year age old live lawful permanent resident period total year time file year age old live lawful permanent resident period total year time file year age old live lawful permanent resident period total year time file meet requirement give simplified version civic test accommodation individual disabilities impairments deaf hard hear request following accommodation request sign language interpreter indicate language example american sign language select applicable box request accommodation disability impairment blind low vision request following accommodation note read information instructions complete middle applicable give family names birth include nickname alias maiden applicable information contact information residence province region foreign address city town street zip state county flr ste apt country foreign address live year provide recent residence list location live year need extra space use additional sheet paper current physical address postal foreign address daytime telephone work telephone evening telephone mobile telephone email address city town state zip street care flr ste apt postal foreign address province region foreign address country foreign address current mailing address different address date residence county type disability impairment example use wheelchair describe nature disability impairment accommodation request accommodation individual disabilities impairment continued usps zip lookup present information residence continued street flr ste apt city town county state zip postal foreign address province region foreign address physical address country foreign address street flr ste apt city town county state zip postal foreign address province region foreign address physical address country foreign address street date residence flr ste apt city town county state zip postal foreign address province region foreign address physical address country foreign address information parent mother citizen complete follow information item information mother parent marry birthday date residence date residence parent citizen skip mother country birth mother date birth date mother citizen know mother information parents continued middle applicable give family father country birth father date birth complete information date father citizen know father information father father citizen current legal citizen father american indian alaska native note require complete category conduct background check instructions information biographic information height feet inches race select applicable box native hawaiian pacific islander black african american asian white hispanic latino hispanic latino ethnicity select box weight pounds brown blue green hazel gray black pink maroon eye color select box bald hair sandy red white gray blond brown black hair color select box current legal citizen mother middle applicable give family list work attend school time time year provide information complete time period include military police intelligence service begin provide information recent current employment study unemployment applicable provide location date work self employ unemployed study year work type print self employ unemployed type print unemployed need extra space use additional sheet paper city town state zip flr apt ste street employer school occupation date date employer school city town state zip street flr ste apt postal foreign address province region foreign address postal foreign address province region foreign address information employment schools attend country foreign address occupation date date country foreign address employer school street flr ste apt zip state city town occupation date date postal foreign address province region foreign address country foreign address list trip hour long take outside year start recent trip work backwards need extra space use additional sheet paper date leave date return trip month countries travel total day outside trip hour long take outside year trip total day hour long spend outside year day time outside current marital status time marry include annulled marriage marriage people marriage person marry provide follow information current spouse current spouse legal divorced single marry widow marry marriage annul middle applicable give family separate marry spouse current member armed force current spouse previous legal middle applicable give family names current spouse include nickname alias maiden applicable family give middle applicable information marital history current spouse date birth date enter marriage current spouse single marry information marital history continued street province region foreign address postal foreign address zip state county city town current spouse present home address current spouse current employer company flr ste apt current spouse citizen item item country foreign address date current spouse citizen current spouse citizen complete follow information current spouse country citizenship nationality current spouse current spouse immigration status explain lawful permanent resident current spouse citizen current spouse citizen complete follow information birth complete following information item middle applicable give family time current spouse marry include annulled marriage marriage people marriage person current spouse marry provide follow information current spouse prior spouse legal current spouse prior spouse immigration status current spouse prior spouse know citizen lawful permanent resident explain date birth current spouse prior spouse country birth current spouse prior spouse country citizenship nationality current spouse prior spouse current spouse previous marriage provide information additional sheet paper information marital history continued current spouse date marriage prior spouse date current spouse marriage end prior spouse current spouse marriage end prior spouse annul divorced spouse deceased explain marry provide follow information prior spouse previous marriage provide information additional sheet paper explain spouse deceased divorced annul prior spouse immigration status marriage end know citizen lawful permanent resident explain middle applicable give family prior spouse date birth date marriage prior spouse date marriage end prior spouse marriage end prior spouse prior spouse country birth prior spouse country citizenship nationality prior spouse legal indicate total child indicate child include child alive miss deceased child bear country child year age old child currently married unmarried child live current stepchild legally adopt child child bear marry information child provide follow information child son daughter list item regardless age list additional child use additional sheet paper middle applicable give family child current legal date birth country birth information child continued child middle applicable give family date birth current address street province region foreign address postal foreign address zip state county city town child relationship example biological child stepchild legally adopt child flr ste apt current address street province region foreign address postal foreign address zip state county city town flr ste apt child relationship example biological child stepchild legally adopt child country foreign address country foreign address current legal current legal middle applicable give family country birth child country birth date birth information child continued current address street province region foreign address postal foreign address zip state county city town flr ste apt child relationship example biological child stepchild legally adopt child current legal middle applicable give family country birth current address street province region foreign address postal foreign address zip state county city town flr ste apt date birth child relationship example biological child stepchild legally adopt child country foreign address country foreign address child additional information person apply naturalization register vote federal state local election claim citizen writing way item numbers question include type print explanation additional sheet paper vote federal state local election hereditary title order nobility foreign country willing inherit title order nobility foreign country naturalization ceremony declare legally incompetent confine mental institution additional information person apply naturalization continue owe overdue federal state local taxis file federal state local tax return lawful permanent resident consider non resident call non resident federal state local tax return lawful permanent resident member involve way associate organization association fund foundation party club society similar group location world provide information need extra space attach name group additional sheet paper provide evidence support group purpose group date membership member way associate directly indirectly communist party totalitarian party advocate directly indirectly overthrow government force violence march work associate way directly indirectly nazi government germany government area occupy ally establish help nazi government germany persecute directly indirectly person race religion national origin membership particular social group political opinion terrorist organization german nazi military unit paramilitary unit self defense unit vigilante unit citizen unit police unit government agency office extermination camp concentration camp prisoner war camp prison labor camp transit camp additional information person apply naturalization continue involve way following genocide torture killing try kill badly hurt try hurt person purpose forcing try force kind sexual contact relation let practice religion member serve help participate follow group military unit paramilitary unit group people act like military group official military police unit self defense unit vigilante unit group people act like police official police rebel group guerrilla group group people use weapon physically attack military police government people militia army people official military insurgent organization group use weapon fight government worker volunteer soldier serve following labor camp place people force work detention facility place people force stay prison camp prison jail place people force stay group help group use weapon person group help group unit organization weapon person threaten group help group tell person use weapon person sell provide weapon person help person sell provide weapon person know person go use weapon person know person go sell weapon go use person convict crime offense charge commit attempt commit assist commit crime offense arrest cite detain law enforcement officer include immigration official official armed force reason commit assist commit attempt commit crime offense arrest item numbers apply record seal expunged clear disclose information include judge law enforcement officer attorney tell long constitute record tell disclose information additional information person apply naturalization continue complete probation parole receive suspend sentence place probation parole jail prison long jail prison year month day question item numbers complete table need extra space use additional sheet paper provide evidence support arrest cite detain charge date arrest cite detain charge arrest cite detain charge city town state country outcome disposition arrest citation detention charge charge file charge dismiss jail probation etc place alternative sentencing rehabilitative program example diversion deferred prosecution withhold adjudication deferred adjudication question item numbers skip item item receive type military paramilitary group people act like military group official military weapon training recruit ask enlist sign conscript require use person year age serve help armed force group use person year age help support people combat item numbers question item numbers include type print explanation additional sheet paper provide evidence support habitual drunkard prostitute procure prostitution sell smuggle control substance illegal drug narcotic married person time helped enter try enter illegally gamble illegally receive income illegal gambling marry order obtain immigration benefit additional information person apply naturalization continue give government official information documentation false fraudulent misleading lie government official gain entry admission gain immigration benefit remove exclude deport order remove exclude deport removal exclusion rescission deportation proceeding include administratively close proceeding currently pende place removal exclusion rescission deportation proceeding serve armed force currently member armed force fail support dependent pay alimony misrepresentation obtain public benefit schedule deploy overseas include vessel month refer address change section instruction notify learn deployment plan file currently station overseas court martiale administratively separate discipline receive honorable discharge armed force discharge training service armed force alien leave avoid draft armed force apply kind exemption military service armed force desert armed force male live time birthday include live lawful nonimmigrant selective service date register register selective service provide information additional information person apply naturalization continue item numbers question include type print explanation additional sheet paper provide evidence support support constitution government understand oath allegiance law require willing bear arm behalf law require willing perform noncombatant service armed force willing oath allegiance law require willing perform work national importance civilian direction register selective service system year age register apply naturalization complete selective service information year age year age file ina section register selective service attach statement explain register provide status information letter selective service applicant statement certification signature note read penalties section instructions complete read understand english read understand question instruction application question applicant statement interpreter question interpreter name read question instruction application language fluent understand note select box item item applicable select box item applicant statement applicant statement preparer request preparer name prepare application base information provide authorize applicant statement certification signature continued applicant certification understand require appear appointment biometric fingerprint photograph signature time require sign oath reaffirming applicant signature applicant signature date signature note applicant completely fill application fail submit require document list instruction deny application interpreter business organization city town state postal province street apt flr ste country interpreter mailing address zip interpreter give interpreter family provide follow information interpreter interpreter interpreter contact information certification signature copies document submit exact photocopy unaltered original document understand require submit original document later date furthermore authorize release information record need determine eligibility immigration benefit seek authorize release information contain application support document record entity person necessary administration enforcement immigration law certify penalty perjury provide authorize information application understand information contain submit application information complete true correct review provide authorize information application understand information contain submit application information complete true correct time filing interpreter contact information certification signature continue interpreter certification certify penalty perjury fluent english language specify item item read applicant identify language question instruction application question applicant inform understand instruction question application include applicant certification verify accuracy date signature interpreter signature interpreter signature contact information declaration signature person prepare application applicant provide follow information preparer preparer preparer give preparer family preparer business organization street apt flr ste city town state postal province country preparer mailing address zip interpreter contact information interpreter daytime telephone interpreter email address interpreter mobile telephone contact information declaration signature person prepare application applicant continued preparer contact information preparer daytime telephone preparer mobile telephone preparer email address attorney accredit representative prepare application behalf applicant applicant consent attorney accredit representative representation applicant case extend preparation application preparer statement extend note attorney accredit representative representation extend preparation application oblige submit complete notice entry appearance attorney accredited representative application preparer certification signature certify penalty perjury prepare application request applicant applicant review complete application inform understand information contain submit application include applicant certification information complete true correct complete application base information applicant provide authorize obtain use preparer signature date signature preparer signature note complete parts officer instruct interview swear affirm certify penalty perjury law america know content application naturalization subscribe include correction complete true correct evidence submit complete true correct signature interview subscribe swear affirm officer printed stamp date signature applicant signature officer signature item item affirm following officer renounce title heretofore hold renounce order nobility heretofore belong applicant signature applicant printed officer signature officer printed list title list order nobility renunciation foreign titles date signature obligation freely mental reservation purpose evasion help god perform work national importance civilian direction require law perform noncombatant service armed force require law applicant signature applicant printed middle applicable give family date signature bear arm behalf require law bear true faith allegiance support defend constitution law america enemy foreign domestic declare oath absolutely entirely renounce abjure allegiance fidelity foreign prince potentate state sovereignty heretofore subject citizen application approve schedule public oath ceremony time require follow oath allegiance immediately prior naturalized citizen sign acknowledge willingness ability oath oath allegiance '</code></pre>
+</div>
+</div>
+</section>
+<section id="migration-policy-institute" class="level1">
+<h1>Migration Policy Institute</h1>
+<p>Similar to the above, the text data from MPI are cleaned by lemmentizing and removing short words.</p>
+<div id="cell-20" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mpi_raw <span class="op">=</span> pd.read_csv(<span class="st">"./data/MPI_raw.csv"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cleaned_txt <span class="op">=</span> []</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sentence <span class="kw">in</span> mpi_raw[<span class="st">"text"</span>]:</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    doc <span class="op">=</span> nlp(sentence)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    cleaned_sentence <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> token <span class="kw">in</span> doc:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> token.is_alpha <span class="op">==</span> <span class="va">True</span>: <span class="co"># Check whether token is alphabet</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">len</span>(token) <span class="op">&gt;</span> <span class="dv">2</span>: <span class="co"># Remove tokens that has less then 3 characters</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> token.is_stop <span class="op">!=</span> <span class="va">True</span>: <span class="co"># Remove stop words</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                    token <span class="op">=</span> token.lemma_ <span class="co"># Lemmentize the words</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                    token <span class="op">=</span> token.lower() <span class="co"># Change to lower case</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                    cleaned_sentence <span class="op">=</span> cleaned_sentence<span class="op">+</span>token<span class="op">+</span><span class="st">" "</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    cleaned_txt.append(cleaned_sentence)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>mpi_raw[<span class="st">"text"</span>] <span class="op">=</span> np.array(cleaned_txt)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>mpi_raw.head()</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># mpi_raw.to_csv("./data/mpi_cleaned.csv", index = False)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">text</th>
+<th data-quarto-table-cell-role="th">label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>mexican immigrant likely proficient english ov...</td>
+<td>Mexico</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>percent mexicans age report limited english pr...</td>
+<td>Mexico</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>approximately percent mexican immigrant speak ...</td>
+<td>Mexico</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>note limited english proficient lep status ref...</td>
+<td>Mexico</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>median age year old compare immigrant native b...</td>
+<td>Mexico</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./data_gathering.html" class="pagination-link" aria-label="Data Gathering">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Data Gathering</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./eda.html" class="pagination-link" aria-label="Data Exploration">
+        <span class="nav-page-text">Data Exploration</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
