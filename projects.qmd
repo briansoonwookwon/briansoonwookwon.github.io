@@ -17,23 +17,27 @@ format:
 
 :::{.column width="50%"}
 ### [ChessMate: A LLM based Chatbot for Chess](https://briansoonwookwon.github.io/docs/dsan_6725/report.html)
-ChessMate is a Streamlit web app that lets users play chess against an LLM and Stockfish, while offering a text interface for move suggestions via RAG over grandmaster games, a fine-tuned model, chess.com articles, and live web search.
+ChessMate is a Streamlit web app that lets users play chess against an LLM and Stockfish, while offering a text interface for move suggestions via RAG over grandmaster games, a fine-tuned model, chess.com articles, and live web search.\
+
+[<img src="github.png" width="50" height="50" />](https://github.com/briansoonwookwon/ChessMate)
 :::
 ::::
 
 <!-- 6500 Project-->
 
 ::::{.columns}
-:::{.column width="50%"}
+:::{.column width="49%"}
 [<img src="docs/dsan_6500/WatchDog_AI.png" height="300" />](https://briansoonwookwon.github.io/docs/dsan_6500/report.html)
 :::
 
 :::{.column width="1%"}
 :::
 
-:::{.column width="49%"}
+:::{.column width="50%"}
 ### [WatchDogAI](https://briansoonwookwon.github.io/docs/dsan_6500/report.html)
 This project aims to detect AI-generated images in election officials’ social media posts about voter information as a first step toward studying potential mistrust in the voter information space.
+
+[<img src="github.png" width="50" height="50" />](https://github.com/briansoonwookwon/WatchdogAI)
 :::
 ::::
 
@@ -41,15 +45,17 @@ This project aims to detect AI-generated images in election officials’ social 
 
 ::::{.columns}
 :::{.column width="49%"}
-[<img src="https://about.fb.com/wp-content/uploads/2018/12/FactCheckers_Thumbnail_Final.jpg" width="500" height="300" />](https://github.com/briansoonwookwon/DSAN_6700)
+[<img src="https://about.fb.com/wp-content/uploads/2018/12/FactCheckers_Thumbnail_Final.jpg" width="500" height="300" />](https://github.com/briansoonwookwon/CrisisFACTS)
 :::
 
 :::{.column width="1%"}
 :::
 
 :::{.column width="50%"}
-### [Information Retrieval: CrisisFACTS](https://github.com/briansoonwookwon/DSAN_6700)
+### [Information Retrieval: CrisisFACTS](https://github.com/briansoonwookwon/CrisisFACTS)
 A Python package on Information Retrieval : CrisisFACTS
+
+[<img src="github.png" width="50" height="50" />](https://github.com/briansoonwookwon/CrisisFACTS)
 :::
 ::::
 
@@ -66,6 +72,8 @@ A Python package on Information Retrieval : CrisisFACTS
 :::{.column width="50%"}
 ### [Patterns in U.S. Political Discussions](https://briansoonwookwon.github.io/docs/dsan_6000/)
 Big Data Analysis Project on Reddit understanding trends and changes of U.S. political discussions in subreddits.
+
+[<img src="github.png" width="50" height="50" />](https://github.com/briansoonwookwon/Patterns-in-U.S.-Political-Discussions)
 :::
 ::::
 
@@ -82,6 +90,8 @@ Big Data Analysis Project on Reddit understanding trends and changes of U.S. pol
 :::{.column width="50%"}
 ### [LSH with improvements from scratch for Similarity Search](https://github.com/briansoonwookwon/LSH)
 A Python package of LSH with two additional improvements to identify near duplicate files.
+
+[<img src="github.png" width="50" height="50" />](https://github.com/briansoonwookwon/LSH)
 :::
 ::::
 
@@ -98,6 +108,8 @@ A Python package of LSH with two additional improvements to identify near duplic
 :::{.column width="50%"}
 ### [Feature Engineered Regression Analysis on Airbnb Short Term Rental Market](https://briansoonwookwon.github.io/docs/dsan_5300/)
 Data Analysis on Airbnb data predicting the rental price and finding important features.
+
+[<img src="github.png" width="50" height="50" />](https://github.com/briansoonwookwon/Analysis-on-Airbnb-Short-Term-Rental-Market)
 :::
 ::::
 
@@ -130,6 +142,8 @@ Comparison on the success between immigrants and native-borns in the U.S. using 
 :::{.column width="50%"}
 ### [DC Crime Trend Analysis from 2018 - 2022](https://briansoonwookwon.github.io/docs/dsan_5200/)
 Data Visualization report on Washington D.C. Crime Date from 2018-2022.
+
+[<img src="github.png" width="50" height="50" />](https://github.com/briansoonwookwon/DC-Crime-Trend-Analysis)
 :::
 ::::
 
