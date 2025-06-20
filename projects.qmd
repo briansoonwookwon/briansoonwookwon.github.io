@@ -55,8 +55,8 @@ This project aims to detect AI-generated images in election officials’ social 
 ### [Information Retrieval: CrisisFACTS](https://github.com/briansoonwookwon/CrisisFACTS)
 A Python package on Information Retrieval : CrisisFACTS
 
-[<img src="github.png" width="50" height="50" />](https://github.com/briansoonwookwon/CrisisFACTS)
-[<img src="github.png" width="50" height="50" />](https://github.com/jaehobahng/crisisfacts_summarization)
+[<img src="github.png" width="50" height="50" />](https://github.com/briansoonwookwon/CrisisFACTS)&nbsp;&nbsp;Frontend\
+[<img src="github.png" width="50" height="50" />](https://github.com/jaehobahng/crisisfacts_summarization)&nbsp;&nbsp;Backend
 :::
 ::::
 
